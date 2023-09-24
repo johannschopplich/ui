@@ -21,5 +21,6 @@
     /* Linting */
     "strict": true
   },
-  "include": ["playground", "src"]
+  "include": ["playground", "src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
