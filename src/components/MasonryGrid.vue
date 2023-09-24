@@ -80,8 +80,7 @@ function updateGridItems() {
   <!-- grid-rows-[masonry] -->
   <div
     ref="container"
-    class="grid grid-cols-[repeat(auto-fit,minmax(min(var(--column-max-w),100%),1fr))] justify-center children:self-start"
-    style="--column-max-w: 25rem"
+    class="grid grid-cols-[repeat(auto-fit,minmax(min(var(--column-max-w,25rem),100%),1fr))] justify-center children:self-start"
   >
     <slot />
   </div>
