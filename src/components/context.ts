@@ -23,13 +23,13 @@ export const gridPatternInjectionKey =
 export const scrollObserverInjectionKey =
   Symbol() as InjectionKey<ScrollObserverContext>;
 
+export const scrollTriggerInjectionKey = Symbol() as InjectionKey<
+  Ref<Element[]>
+>;
+
 export const scrollReactorGroupInjectionKey = Symbol() as InjectionKey<
   Ref<Element[]>
 >;
 
 export const textRevealInjectionKey =
   Symbol() as InjectionKey<TextRevealContext>;
-
-export const scrollTriggerInjectionKey = Symbol() as InjectionKey<
-  Ref<Element[]>
->;

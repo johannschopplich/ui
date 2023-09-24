@@ -15,7 +15,6 @@ const container = ref<HTMLElement | undefined>();
 const children = ref<Element[]>([]);
 
 onMounted(() => {
-  console.log(container.value);
   children.value = Array.from(container.value!.children);
 });
 
