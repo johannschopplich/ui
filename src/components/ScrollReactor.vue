@@ -9,7 +9,7 @@ withDefaults(
   }>(),
   {
     as: "div",
-  }
+  },
 );
 
 const container = ref<HTMLElement | undefined>();
@@ -18,7 +18,7 @@ const context = inject(contextInjectionKey)!;
 const peers = inject(peersInjectionKey);
 
 const index = computed(() =>
-  peers?.value ? peers.value.indexOf(container.value!) : undefined
+  peers?.value ? peers.value.indexOf(container.value!) : undefined,
 );
 
 // Active element
@@ -28,7 +28,7 @@ const isPrevious = computed(() => context.previous?.value === index.value);
 // Indicators
 const show = computed(
   () =>
-    isActive.value || (context.active?.value === undefined && isPrevious.value)
+    isActive.value || (context.active?.value === undefined && isPrevious.value),
 );
 const faded = computed(() => context.active?.value === undefined);
 </script>

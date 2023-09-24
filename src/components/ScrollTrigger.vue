@@ -10,7 +10,7 @@ withDefaults(
   }>(),
   {
     as: "div",
-  }
+  },
 );
 
 const container = ref<HTMLElement | undefined>();
@@ -22,7 +22,7 @@ const peers = inject(peersInjectionKey);
 const index = computed(() =>
   container.value && peers?.value
     ? peers.value.indexOf(container.value)
-    : undefined
+    : undefined,
 );
 
 const isFirst = computed(() => index.value === 0);
@@ -36,7 +36,7 @@ const isPrevious = computed(() => context.previous?.value === index.value);
 // Indicators
 const show = computed(
   () =>
-    isActive.value || (context.active?.value === undefined && isPrevious.value)
+    isActive.value || (context.active?.value === undefined && isPrevious.value),
 );
 const faded = computed(() => context.active?.value === undefined);
 
@@ -47,7 +47,7 @@ const { height: windowHeight } = useWindowSize();
 const isVisible = computed(
   () =>
     y.value > windowHeight.value / 2 - height.value &&
-    y.value <= windowHeight.value / 2
+    y.value <= windowHeight.value / 2,
 );
 
 watchEffect(() => {

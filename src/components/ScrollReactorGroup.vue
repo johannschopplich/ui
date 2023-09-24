@@ -12,7 +12,7 @@ withDefaults(
   }>(),
   {
     as: "div",
-  }
+  },
 );
 
 const container = ref<HTMLElement | undefined>();

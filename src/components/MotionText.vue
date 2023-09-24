@@ -10,7 +10,7 @@ const props = withDefaults(
   {
     as: "div",
     mode: "symbol",
-  }
+  },
 );
 
 const tokens = computed(() => {

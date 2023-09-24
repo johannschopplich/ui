@@ -20,7 +20,7 @@ withDefaults(
   }>(),
   {
     as: "div",
-  }
+  },
 );
 
 const active = ref<number | undefined>();
