@@ -42,7 +42,7 @@
     "components.d.ts"
   ],
   "scripts": {
-    "build": "unbuild && node scripts/post-build.mjs",
+    "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "eslint . --fix --ignore-path .gitignore",

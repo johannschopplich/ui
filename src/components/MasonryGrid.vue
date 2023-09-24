@@ -1,15 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { useDebounceFn, useResizeObserver } from "@vueuse/core";
-
-const props = withDefaults(
-  defineProps<{
-    columnMaxWidth?: string;
-  }>(),
-  {
-    columnMaxWidth: "25rem",
-  },
-);
 
 const container = ref<HTMLElement | undefined>();
 let properties:
@@ -23,11 +14,6 @@ let properties:
 
 const debouncedUpdateGridItems = useDebounceFn(updateGridItems, 100);
 useResizeObserver(container, debouncedUpdateGridItems);
-
-watch(
-  () => props.columnMaxWidth,
-  () => updateGridItems(),
-);
 
 onMounted(() => {
   if (!container.value) return;
@@ -94,8 +80,8 @@ function updateGridItems() {
   <!-- grid-rows-[masonry] -->
   <div
     ref="container"
-    class="grid grid-cols-[repeat(auto-fit,minmax(min(var(--masonry-col-max-w),100%),1fr))] justify-center children:self-start"
-    :style="`--masonry-col-max-w: ${columnMaxWidth}`"
+    class="grid grid-cols-[repeat(auto-fit,minmax(min(var(--column-max-w),100%),1fr))] justify-center children:self-start"
+    style="--column-max-w: 25rem"
   >
     <slot />
   </div>

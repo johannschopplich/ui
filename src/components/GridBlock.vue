@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import { contextInjectionKey } from "./GridPattern.vue";
+import { gridPatternInjectionKey } from "./context";
 
 defineProps<{
   row: number;
   column: number;
 }>();
 
-const grid = inject(contextInjectionKey)!;
+const grid = inject(gridPatternInjectionKey)!;
 </script>
 
 <template>

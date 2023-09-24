@@ -1,19 +1,7 @@
-<script lang="ts">
-import { provide } from "vue";
-import type { InjectionKey } from "vue";
-
-export interface GridPatternProps {
-  size?: number;
-  offsetX?: number;
-  offsetY?: number;
-}
-
-export const contextInjectionKey = Symbol() as InjectionKey<
-  Required<GridPatternProps>
->;
-</script>
-
 <script setup lang="ts">
+import { provide } from "vue";
+import { gridPatternInjectionKey } from "./context";
+
 const props = withDefaults(
   defineProps<{
     size?: number;
@@ -29,7 +17,7 @@ const props = withDefaults(
 
 const id = Math.round(Math.random() * 999);
 
-provide(contextInjectionKey, props);
+provide(gridPatternInjectionKey, props);
 </script>
 
 <template>

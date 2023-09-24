@@ -1,19 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 import { provide, ref } from "vue";
 import { usePrevious } from "@vueuse/core";
-import type { InjectionKey, Ref } from "vue";
+import { scrollObserverInjectionKey } from "./context";
 
-export interface ScrollObserverContext {
-  active: Ref<number | undefined>;
-  previous: Ref<number | undefined>;
-  setActive: (index?: number) => void;
-}
-
-export const contextInjectionKey =
-  Symbol() as InjectionKey<ScrollObserverContext>;
-</script>
-
-<script setup lang="ts">
 withDefaults(
   defineProps<{
     as?: string;
@@ -27,7 +16,7 @@ const active = ref<number | undefined>();
 
 const previous = usePrevious(active, 0);
 
-provide(contextInjectionKey, {
+provide(scrollObserverInjectionKey, {
   active,
   previous,
   setActive,

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed, inject, ref, watchEffect } from "vue";
 import { useElementBounding, useWindowSize } from "@vueuse/core";
-import { contextInjectionKey } from "./ScrollObserver.vue";
-import { peersInjectionKey } from "./ScrollTriggerGroup.vue";
+import {
+  scrollObserverInjectionKey,
+  scrollTriggerInjectionKey,
+} from "./context";
 
 withDefaults(
   defineProps<{
@@ -14,10 +16,10 @@ withDefaults(
 );
 
 const container = ref<HTMLElement | undefined>();
-const context = inject(contextInjectionKey)!;
+const context = inject(scrollObserverInjectionKey)!;
 
 // Current element index
-const peers = inject(peersInjectionKey);
+const peers = inject(scrollTriggerInjectionKey);
 
 const index = computed(() =>
   container.value && peers?.value

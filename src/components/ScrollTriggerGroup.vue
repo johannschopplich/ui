@@ -1,11 +1,7 @@
-<script lang="ts">
-import { onMounted, provide, ref } from "vue";
-import type { InjectionKey, Ref } from "vue";
-
-export const peersInjectionKey = Symbol() as InjectionKey<Ref<Element[]>>;
-</script>
-
 <script setup lang="ts">
+import { onMounted, provide, ref } from "vue";
+import { scrollTriggerInjectionKey } from "./context";
+
 withDefaults(
   defineProps<{
     as?: string;
@@ -22,7 +18,8 @@ onMounted(() => {
   children.value = Array.from(container.value!.children);
 });
 
-provide(peersInjectionKey, children);
+// Provide peers
+provide(scrollTriggerInjectionKey, children);
 </script>
 
 <template>

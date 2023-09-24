@@ -1,17 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 import { computed, provide, ref } from "vue";
 import { useElementBounding } from "@vueuse/core";
-import type { ComputedRef, InjectionKey } from "vue";
+import { textRevealInjectionKey } from "./context";
 
-export interface TextRevealContext {
-  tokens: ComputedRef<string[]>;
-  progress: ComputedRef<number>;
-}
-
-export const contextInjectionKey = Symbol() as InjectionKey<TextRevealContext>;
-</script>
-
-<script setup lang="ts">
 const props = withDefaults(
   defineProps<{
     as?: string;
@@ -28,7 +19,7 @@ const progress = computed(() => (-top.value / height.value) * 2);
 
 const tokens = computed<string[]>(() => props.body.match(/\S+|\s+/g) || []);
 
-provide(contextInjectionKey, {
+provide(textRevealInjectionKey, {
   tokens,
   progress,
 });
