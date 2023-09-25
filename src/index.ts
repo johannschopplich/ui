@@ -12,3 +12,4 @@ const install: Plugin = {
 
 export default install;
 export * from "./components";
+export * from "./composables";

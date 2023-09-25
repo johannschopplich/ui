@@ -6,6 +6,7 @@ import GridBlock from "./GridBlock.vue";
 import GridPattern from "./GridPattern.vue";
 import Marquee from "./Marquee.vue";
 import MasonryGrid from "./MasonryGrid.vue";
+import ModalsPortal from "./ModalsPortal.vue";
 import MotionText from "./MotionText.vue";
 import ScrollObserver from "./ScrollObserver.vue";
 import ScrollReactor from "./ScrollReactor.vue";
@@ -26,6 +27,7 @@ export {
   GridPattern,
   Marquee,
   MasonryGrid,
+  ModalsPortal,
   MotionText,
   ScrollObserver,
   ScrollReactor,
