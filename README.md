@@ -23,10 +23,6 @@ Nuxt is supported out of the box, but the Vue components provided by this librar
 
 ```ts
 export default defineNuxtConfig({
-  build: {
-    transpile: ["@byjohann/ui"],
-  },
-
   imports: {
     presets: [
       {
@@ -34,6 +30,11 @@ export default defineNuxtConfig({
         imports: ["useModals"],
       },
     ],
+  },
+
+  build: {
+    // Transpile the Vue.js components
+    transpile: ["@byjohann/ui"],
   },
 
   vite: {
