@@ -16,4 +16,4 @@ export {
   MapboxSource,
 };
 
-export * from "./composables";
+export { useMap } from "./composables";
