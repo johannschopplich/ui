@@ -40,6 +40,7 @@ async function openModal() {
       v-slot="{ isActive }"
       :offset="200"
       class="[--duration:500ms]"
+      once
     >
       <h1
         :class="{ 'translate-y-8 opacity-0': !isActive }"
