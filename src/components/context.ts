@@ -18,6 +18,11 @@ export interface ScrollObserverContext {
   setActive: (index?: number) => void;
 }
 
+export interface SliderContext {
+  container: Ref<HTMLElement | undefined>;
+  peers: Ref<Element[]>;
+}
+
 export interface TextRevealContext {
   tokens: ComputedRef<string[]>;
   progress: ComputedRef<number>;
@@ -30,4 +35,5 @@ export const gridPatternCtxKey = Symbol() as InjectionKey<GridPatternContext>;
 export const scrollObserverCtxKey = Symbol() as InjectionKey<ScrollObserverContext>;
 export const scrollTriggerCtxKey = Symbol() as InjectionKey<Ref<Element[]>>;
 export const scrollReactorCtxKey = Symbol() as InjectionKey<Ref<Element[]>>;
+export const sliderCtxKey = Symbol() as InjectionKey<SliderContext>;
 export const textRevealCtxKey = Symbol() as InjectionKey<TextRevealContext>;

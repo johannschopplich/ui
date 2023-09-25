@@ -14,6 +14,8 @@ import {
   ScrollReveal,
   ScrollTrigger,
   ScrollTriggerGroup,
+  SliderGroup,
+  SliderItem,
   TextReveal,
   TextRevealToken,
 } from "../src/components";
@@ -50,9 +52,10 @@ async function openModal() {
       >
         Playground
       </h1>
-      <p class="text-center" @click="openModal()">
+      <p class="text-center">
         <button
-          class="group mt-4 inline-flex items-center gap-2 rounded-lg bg-black/5 px-5 py-2.5 text-xs font-medium tracking-wide transition md:mt-8 hover:bg-black/10"
+          class="group mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-100 px-5 py-2.5 text-xs font-medium tracking-wide transition md:mt-8 hover:bg-gray-200"
+          @click="openModal()"
         >
           Open Modal
         </button>
@@ -65,16 +68,20 @@ async function openModal() {
             :key="index"
             :style="{ '--delay': `${(index + 1) * 250}ms` }"
             :class="[isActive ? 'delay-[--delay]' : 'translate-y-8 opacity-0']"
-            class="relative aspect-1/1 w-full bg-gray-200 transition-transform,opacity duration-[--duration]"
+            class="relative aspect-1/1 w-full bg-gray-100 transition-transform,opacity duration-[--duration]"
           >
             <DotPattern
               :size="32"
               :radius="1.5"
               :offset-x="0"
               :offset-y="0"
-              class="[mask-image:radial-gradient(white,transparent_85%)] absolute inset-0 h-full w-full fill-black/20"
+              class="[mask-image:radial-gradient(white,transparent_85%)] absolute inset-0 h-full w-full fill-gray-400"
+            />
+            <div
+              class="absolute inset-0 flex items-center justify-center text-size-[10rem] font-medium leading-tight text-rose-300"
             >
-            </DotPattern>
+              {{ index + 1 }}
+            </div>
           </div>
         </div>
       </div>
@@ -113,7 +120,7 @@ async function openModal() {
           v-slot="{ isActive }"
           class="py-8"
         >
-          <div :class="[!isActive && 'text-black/30']" class="transition">
+          <div :class="[!isActive && 'text-gray-300']" class="transition">
             <div class="text-2xl font-medium leading-snug">
               Feature Number {{ index + 1 }}
             </div>
@@ -135,7 +142,8 @@ async function openModal() {
           class="absolute inset-0 flex items-center justify-center"
         >
           <div
-            class="relative h-64 w-64 overflow-hidden rounded-2xl bg-black/5 p-12 transition"
+            class="relative h-64 w-64 overflow-hidden rounded-2xl bg-gray-100 p-12 transition"
+            :class="[!show && 'opacity-0']"
           >
             <div
               class="absolute inset-0 bg-gradient-to-b transition"
@@ -143,7 +151,6 @@ async function openModal() {
                 index === 0 && 'from-purple-100 to-indigo-300',
                 index === 1 && 'from-yellow-100 to-amber-300',
                 index === 2 && 'from-lime-100 to-green-300',
-                !show && 'opacity-0',
                 faded && 'opacity-0',
               ]"
             />
@@ -179,7 +186,17 @@ async function openModal() {
       </MotionText>
     </ScrollReveal>
 
-    <ScrollObserver class="relative h-[100svh]">
+    <div class="relative ml-[calc(50%-50vw)] w-[100vw]">
+      <SliderGroup class="scroll-pl-6 gap-6 px-6">
+        <SliderItem v-for="i in 5" :key="i">
+          <div
+            class="relative aspect-[4/1] w-[calc(100vw-4.5rem)] animate-pulse rounded-2xl bg-gray-200"
+          />
+        </SliderItem>
+      </SliderGroup>
+    </div>
+
+    <ScrollObserver class="relative h-[100svh] flex items-center">
       <ScrollTriggerGroup class="text-3xl space-y-3">
         <ScrollTrigger v-slot="{ isActive }" class="relative">
           <span
@@ -196,7 +213,7 @@ async function openModal() {
           </span>
 
           <span
-            class="relative text-black/20 transition"
+            class="relative text-gray-300 transition"
             :class="[isActive && 'opacity-0']"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -218,7 +235,7 @@ async function openModal() {
           </span>
 
           <span
-            class="relative text-black/20 transition"
+            class="relative text-gray-300 transition"
             :class="[isActive && 'opacity-0']"
           >
             Optio veritatis iure laborum alias necessitatibus, animi ad, placeat
@@ -241,7 +258,7 @@ async function openModal() {
           </span>
 
           <span
-            class="relative text-black/20 transition"
+            class="relative text-gray-300 transition"
             :class="[isActive && 'opacity-0']"
           >
             Minus culpa saepe reiciendis, porro tempore ab reprehenderit!
@@ -250,36 +267,36 @@ async function openModal() {
       </ScrollTriggerGroup>
     </ScrollObserver>
 
-    <aside class="relative ml-[calc(50%-50vw)] w-[100vw]">
+    <div class="relative ml-[calc(50%-50vw)] w-[100vw]">
       <Marquee>
         <div v-for="(item, index) in 10" :key="index" class="h-full px-2.5">
           <div
-            class="relative h-full w-[28rem] border border-black/5 rounded-2xl bg-black/5 px-8 py-6"
+            class="relative h-full w-[28rem] border border-gray-200 rounded-2xl bg-gray-100 px-8 py-6"
           >
-            <div class="pb-4 font-light text-black/75">
+            <div class="pb-4 font-light text-gray-800">
               {{ text }}
             </div>
           </div>
         </div>
       </Marquee>
-    </aside>
+    </div>
 
     <DetailsGroup class="space-y-5">
       <DetailsItem
         v-for="(item, index) in 5"
         :key="index"
         v-slot="{ isActive, toggle }"
-        class="group border border-black/10 rounded-2xl bg-black/5 transition duration-500 hover:bg-black/[0.075]"
+        class="group border border-gray-200 rounded-2xl bg-gray-100 transition duration-500 hover:bg-gray-50"
       >
         <div class="flex cursor-pointer items-center p-4" @click="toggle">
-          <div class="text-black/75 transition group-hover:text-black">
+          <div class="text-gray-600 transition group-hover:text-gray-800">
             Detail Item {{ index + 1 }}
           </div>
 
           <div class="relative ml-auto">
-            <span
+            <div
               :class="[isActive ? 'rotate-180' : 'rotate-45']"
-              class="i-ph:x-circle h-6 w-6 text-black/50 transition-transform duration-500"
+              class="i-ph:x-circle h-6 w-6 text-gray-600 transition-transform duration-500"
             />
           </div>
         </div>
@@ -288,7 +305,7 @@ async function openModal() {
           class="overflow-hidden px-4 transition-all duration-500 will-change-height"
         >
           <p
-            class="pb-4 font-light leading-relaxed tracking-wide text-black/75"
+            class="pb-4 font-light leading-relaxed tracking-wide text-gray-800"
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
             facere deserunt earum eos perspiciatis rem, ipsam omnis tenetur

@@ -13,6 +13,8 @@ import ScrollReactor from "./ScrollReactor.vue";
 import ScrollReactorGroup from "./ScrollReactorGroup.vue";
 import ScrollTrigger from "./ScrollTrigger.vue";
 import ScrollTriggerGroup from "./ScrollTriggerGroup.vue";
+import SliderGroup from "./SliderGroup.vue";
+import SliderItem from "./SliderItem.vue";
 import ScrollReveal from "./ScrollReveal.vue";
 import SpotlightCard from "./SpotlightCard.vue";
 import TextReveal from "./TextReveal.vue";
@@ -34,6 +36,8 @@ export {
   ScrollReactorGroup,
   ScrollTrigger,
   ScrollTriggerGroup,
+  SliderGroup,
+  SliderItem,
   ScrollReveal,
   SpotlightCard,
   TextReveal,
