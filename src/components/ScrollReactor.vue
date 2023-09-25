@@ -14,10 +14,10 @@ withDefaults(
 const container = ref<HTMLElement | undefined>();
 const context = inject(scrollObserverCtxKey)!;
 
-const peers = inject(scrollReactorCtxKey);
+const peers = inject(scrollReactorCtxKey)!;
 
 const index = computed(() =>
-  peers?.value ? peers.value.indexOf(container.value!) : undefined,
+  container.value ? peers.value.indexOf(container.value) : undefined,
 );
 
 // Active element

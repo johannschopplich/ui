@@ -15,9 +15,7 @@ const container = ref<HTMLElement | undefined>();
 const context = inject(detailsCtxKey)!;
 
 const index = computed(() =>
-  container.value && context.peers.value
-    ? context.peers.value.indexOf(container.value)
-    : -1,
+  container.value ? context.peers.value.indexOf(container.value) : -1,
 );
 
 const isActive = computed(() => index.value === context.activeItem.value);

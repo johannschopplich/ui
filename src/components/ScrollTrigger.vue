@@ -16,12 +16,10 @@ const container = ref<HTMLElement | undefined>();
 const context = inject(scrollObserverCtxKey)!;
 
 // Current element index
-const peers = inject(scrollTriggerCtxKey);
+const peers = inject(scrollTriggerCtxKey)!;
 
 const index = computed(() =>
-  container.value && peers?.value
-    ? peers.value.indexOf(container.value)
-    : undefined,
+  container.value ? peers.value.indexOf(container.value) : undefined,
 );
 
 const isFirst = computed(() => index.value === 0);

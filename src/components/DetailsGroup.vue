@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { onMounted, provide, ref } from "vue";
+import { provide, ref, watchEffect } from "vue";
 import { detailsCtxKey } from "./context";
 
 const container = ref<HTMLElement | undefined>();
 const activeItem = ref(-1);
 const children = ref<Element[]>([]);
 
-onMounted(() => {
-  children.value = Array.from(container.value!.children);
+watchEffect(() => {
+  children.value = Array.from(container.value?.children ?? []);
 });
 
 provide(detailsCtxKey, {
