@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, ref, watchEffect } from "vue";
+import { provide, ref, watch } from "vue";
 import { scrollTriggerCtxKey } from "./context";
 
 withDefaults(
@@ -17,8 +17,8 @@ const children = ref<Element[]>([]);
 // Provide peers
 provide(scrollTriggerCtxKey, children);
 
-watchEffect(() => {
-  children.value = Array.from(container.value?.children ?? []);
+watch(container, (value) => {
+  children.value = Array.from(value?.children ?? []);
 });
 </script>
 
