@@ -5,7 +5,7 @@
     "module": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      "@byjohann/components": ["./src/index.ts"]
+      "@byjohann/ui": ["./src/index.ts"]
     },
     "skipLibCheck": true,
 

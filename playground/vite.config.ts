@@ -10,13 +10,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "~/": `${resolve(currentDir, "src")}/`,
-      "@byjohann/components": resolve(currentDir, "../src/index.ts"),
+      "@byjohann/ui": resolve(currentDir, "../src/index.ts"),
     },
   },
 
   plugins: [Vue(), UnoCSS()],
 
   optimizeDeps: {
-    exclude: ["@byjohann/components"],
+    exclude: ["@byjohann/ui"],
   },
 });

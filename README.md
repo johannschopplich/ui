@@ -1,6 +1,6 @@
-# @byjohann/components
+# @byjohann/ui
 
-[![NPM version](https://img.shields.io/npm/v/@byjohann/components?color=a1b858&label=)](https://www.npmjs.com/package/@byjohann/components)
+[![NPM version](https://img.shields.io/npm/v/@byjohann/ui?color=a1b858&label=)](https://www.npmjs.com/package/@byjohann/ui)
 
 > A collection of Vue.js components for my projects.
 
@@ -8,13 +8,13 @@
 
 ```bash
 # pnpm
-pnpm add @byjohann/components
+pnpm add @byjohann/ui
 
 # npm
-npm i @byjohann/components
+npm i @byjohann/ui
 
 # yarn
-yarn add @byjohann/components
+yarn add @byjohann/ui
 ```
 
 ### Nuxt Support
@@ -24,7 +24,7 @@ Nuxt is supported out of the box, but the Vue components provided by this librar
 ```ts
 export default defineNuxtConfig({
   build: {
-    transpile: ["@byjohann/components"],
+    transpile: ["@byjohann/ui"],
   },
 });
 ```
