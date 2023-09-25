@@ -3,11 +3,11 @@ import type { Ref } from "vue";
 import type { Evented } from "mapbox-gl";
 
 /**
- * Map a mapbox element's events to the given Vue element
+ * Map a Mapbox element's events to the given Vue element
  */
 export function usePropsBinding<T extends Evented>(
   /** The component props */
-  props: Record<string, any>,
+  props: Record<string, unknown>,
   /** The Mapbox element bound to the component */
   mapboxElement: Ref<T | undefined>,
 ) {
@@ -21,24 +21,14 @@ export function usePropsBinding<T extends Evented>(
         const setMethodName =
           prop === "mapStyle" ? "setStyle" : `set${upperFirst(prop)}`;
 
-        const methodExists =
-          typeof element[setMethodName as keyof T] === "function";
+        const method = element[setMethodName as keyof T];
 
         // Do nothing if `setMethodName` is not a function of `mapBoxElement`
-        if (!methodExists) return;
+        if (!isFunction(method)) return;
 
-        watch(
-          () => props[prop],
-          (newValue) => {
-            // @ts-expect-error: Expression is not callable
-            element[setMethodName as keyof T](newValue);
-          },
-          {
-            deep:
-              (typeof props[prop] === "object" && props[prop] !== null) ||
-              Array.isArray(props[prop]),
-          },
-        );
+        watch(() => props[prop], method, {
+          deep: Array.isArray(props[prop]) || isObject(props[prop]),
+        });
       });
   }
 
@@ -56,4 +46,12 @@ export function usePropsBinding<T extends Evented>(
 
 function upperFirst(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function isFunction(value: unknown): value is (...args: any[]) => any {
+  return typeof value === "function";
+}
+
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }

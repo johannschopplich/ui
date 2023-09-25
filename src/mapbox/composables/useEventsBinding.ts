@@ -6,7 +6,7 @@ const cache = new Map<string, keyof MapLayerEventType>();
 const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 
 /**
- * Map a mapbox element's events to a Vue component
+ * Map a Mapbox element's events to a Vue component
  */
 export function useEventsBinding<T extends Evented>(
   /** The emit function for the current component */

@@ -1,10 +1,9 @@
 import { inject } from "vue";
-import type { ShallowRef } from "vue";
-import type { Map } from "mapbox-gl";
+import { mapCtxKey } from "../components/context";
 
 /**
  * Inject the provided map instance
  */
 export function useMap() {
-  return inject<ShallowRef<Map | undefined>>("mapbox-map")!;
+  return inject(mapCtxKey)!;
 }

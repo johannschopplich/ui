@@ -18,6 +18,7 @@ import type {
   TransformRequestFunction,
 } from "mapbox-gl";
 import { useEventsBinding, usePropsBinding } from "../composables";
+import { mapCtxKey } from "./context";
 
 defineOptions({ inheritAttrs: false });
 
@@ -178,7 +179,7 @@ const events = [
 ];
 
 const map = shallowRef<Map | undefined>();
-provide("mapbox-map", map);
+provide(mapCtxKey, map);
 
 const root = ref<HTMLElement | undefined>();
 const isLoaded = ref(false);

@@ -1,3 +1,6 @@
+import type { InjectionKey, ShallowRef } from "vue";
+import type { Map } from "mapbox-gl";
+
 export type MapboxImage =
   | HTMLImageElement
   | ArrayBufferView
@@ -21,3 +24,5 @@ export function getClusterIndex() {
   clusterIndex++;
   return currentIndex;
 }
+
+export const mapCtxKey = Symbol() as InjectionKey<ShallowRef<Map | undefined>>;
