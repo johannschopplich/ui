@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useSlots } from "vue";
-import * as mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import type { LngLatLike, Marker, MarkerOptions, PointLike } from "mapbox-gl";
 import { useEventsBinding, useMap, usePropsBinding } from "../composables";
 

@@ -17,7 +17,7 @@ npm i @byjohann/ui
 yarn add @byjohann/ui
 ```
 
-### Nuxt Support
+### Nuxt Usage
 
 Nuxt is supported out of the box, but the Vue components provided by this library need to be transpiled for the server-side rendering to work. Add the following to your `nuxt.config.ts`:
 
@@ -34,6 +34,13 @@ export default defineNuxtConfig({
         imports: ["useModals"],
       },
     ],
+  },
+
+  vite: {
+    optimizeDeps: {
+      // Transform CJS packages to ESM
+      include: ["mapbox-gl"],
+    },
   },
 });
 ```

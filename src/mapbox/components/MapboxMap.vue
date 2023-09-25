@@ -7,7 +7,7 @@ import {
   ref,
   shallowRef,
 } from "vue";
-import * as mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import type {
   FitBoundsOptions,
   LngLatBoundsLike,
@@ -192,7 +192,6 @@ useEventsBinding(emit, map, events);
 usePropsBinding(props, map);
 
 onMounted(() => {
-  // @ts-expect-error: `mapboxgl` not imported as namespace
   mapboxgl.accessToken = props.accessToken;
 
   map.value = new mapboxgl.Map(options.value);
