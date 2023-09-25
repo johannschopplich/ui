@@ -65,9 +65,6 @@
     "mapbox-gl": "^2.15.0",
     "vue": "^3"
   },
-  "dependencies": {
-    "scule": "^1.0.0"
-  },
   "devDependencies": {
     "@byjohann/eslint-config": "^0.2.2",
     "@iconify-json/ph": "^1.1.6",

@@ -1,4 +1,3 @@
-import { upperFirst } from "scule";
 import { watch } from "vue";
 import type { Ref } from "vue";
 import type { Evented } from "mapbox-gl";
@@ -53,4 +52,8 @@ export function usePropsBinding<T extends Evented>(
       }
     });
   }
+}
+
+function upperFirst(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
