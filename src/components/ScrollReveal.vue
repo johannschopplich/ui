@@ -49,11 +49,11 @@ const isIntersecting = computed(() => {
   return isVisible.value && y.value <= windowHeight.value - props.offset;
 });
 
-watch(isIntersecting, () => {
-  if (props.once && isIntersecting.value) {
+watch(isIntersecting, (value) => {
+  if (props.once && value) {
     isActive.value = true;
   } else if (!props.once) {
-    isActive.value = isIntersecting.value;
+    isActive.value = value;
   }
 });
 </script>
