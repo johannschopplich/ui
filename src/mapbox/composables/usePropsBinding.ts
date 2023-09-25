@@ -24,11 +24,18 @@ export function usePropsBinding<T extends Evented>(
         const method = element[setMethodName as keyof T];
 
         // Do nothing if `setMethodName` is not a function of `mapBoxElement`
-        if (!isFunction(method)) return;
+        if (typeof method !== "function") return;
 
-        watch(() => props[prop], method, {
-          deep: Array.isArray(props[prop]) || isObject(props[prop]),
-        });
+        watch(
+          () => props[prop],
+          (value) => {
+            // @ts-expect-error: Function is callable
+            element[setMethodName as keyof T](value);
+          },
+          {
+            deep: Array.isArray(props[prop]) || isObject(props[prop]),
+          },
+        );
       });
   }
 
@@ -46,10 +53,6 @@ export function usePropsBinding<T extends Evented>(
 
 function upperFirst(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
-}
-
-function isFunction(value: unknown): value is (...args: any[]) => any {
-  return typeof value === "function";
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
