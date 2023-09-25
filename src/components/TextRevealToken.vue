@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, inject } from "vue";
-import { textRevealInjectionKey } from "./context";
+import { textRevealCtxKey } from "./context";
 
 const props = defineProps<{
   index: number;
 }>();
 
-const context = inject(textRevealInjectionKey)!;
+const context = inject(textRevealCtxKey)!;
 
 const isActive = computed(
   () => props.index / context.tokens.value.length < context.progress.value,

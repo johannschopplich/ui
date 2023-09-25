@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, ref } from "vue";
-import {
-  scrollObserverInjectionKey,
-  scrollReactorGroupInjectionKey,
-} from "./context";
+import { scrollObserverCtxKey, scrollReactorCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
@@ -15,9 +12,9 @@ withDefaults(
 );
 
 const container = ref<HTMLElement | undefined>();
-const context = inject(scrollObserverInjectionKey)!;
+const context = inject(scrollObserverCtxKey)!;
 
-const peers = inject(scrollReactorGroupInjectionKey);
+const peers = inject(scrollReactorCtxKey);
 
 const index = computed(() =>
   peers?.value ? peers.value.indexOf(container.value!) : undefined,

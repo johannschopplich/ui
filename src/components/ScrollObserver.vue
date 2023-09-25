@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { provide, ref } from "vue";
 import { usePrevious } from "@vueuse/core";
-import { scrollObserverInjectionKey } from "./context";
+import { scrollObserverCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
@@ -16,7 +16,7 @@ const active = ref<number | undefined>();
 
 const previous = usePrevious(active, 0);
 
-provide(scrollObserverInjectionKey, {
+provide(scrollObserverCtxKey, {
   active,
   previous,
   setActive,

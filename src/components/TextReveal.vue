@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, provide, ref } from "vue";
 import { useElementBounding } from "@vueuse/core";
-import { textRevealInjectionKey } from "./context";
+import { textRevealCtxKey } from "./context";
 
 const props = withDefaults(
   defineProps<{
@@ -19,7 +19,7 @@ const progress = computed(() => (-top.value / height.value) * 2);
 
 const tokens = computed<string[]>(() => props.body.match(/\S+|\s+/g) || []);
 
-provide(textRevealInjectionKey, {
+provide(textRevealCtxKey, {
   tokens,
   progress,
 });

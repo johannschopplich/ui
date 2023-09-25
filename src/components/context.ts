@@ -1,5 +1,11 @@
 import type { ComputedRef, InjectionKey, Ref } from "vue";
 
+interface DetailsGroupContext {
+  peers: Ref<Element[]>;
+  activeItem: Ref<number>;
+  setActive: (index: number) => void;
+}
+
 export interface GridPatternContext {
   size: number;
   offsetX: number;
@@ -17,19 +23,11 @@ export interface TextRevealContext {
   progress: ComputedRef<number>;
 }
 
-export const gridPatternInjectionKey =
-  Symbol() as InjectionKey<GridPatternContext>;
-
-export const scrollObserverInjectionKey =
-  Symbol() as InjectionKey<ScrollObserverContext>;
-
-export const scrollTriggerInjectionKey = Symbol() as InjectionKey<
-  Ref<Element[]>
->;
-
-export const scrollReactorGroupInjectionKey = Symbol() as InjectionKey<
-  Ref<Element[]>
->;
-
-export const textRevealInjectionKey =
-  Symbol() as InjectionKey<TextRevealContext>;
+export const detailsCtxKey = Symbol() as InjectionKey<DetailsGroupContext>;
+export const detailsItemCtxKey = Symbol() as InjectionKey<ComputedRef<boolean>>;
+export const gridPatternCtxKey = Symbol() as InjectionKey<GridPatternContext>;
+// prettier-ignore
+export const scrollObserverCtxKey = Symbol() as InjectionKey<ScrollObserverContext>;
+export const scrollTriggerCtxKey = Symbol() as InjectionKey<Ref<Element[]>>;
+export const scrollReactorCtxKey = Symbol() as InjectionKey<Ref<Element[]>>;
+export const textRevealCtxKey = Symbol() as InjectionKey<TextRevealContext>;

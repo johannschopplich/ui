@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, provide, ref } from "vue";
-import { scrollReactorGroupInjectionKey } from "./context";
+import { scrollReactorCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
@@ -19,7 +19,7 @@ onMounted(() => {
 });
 
 // Provide peers
-provide(scrollReactorGroupInjectionKey, children);
+provide(scrollReactorCtxKey, children);
 </script>
 
 <template>

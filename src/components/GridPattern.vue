@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide } from "vue";
-import { gridPatternInjectionKey } from "./context";
+import { gridPatternCtxKey } from "./context";
 
 const props = withDefaults(
   defineProps<{
@@ -17,7 +17,7 @@ const props = withDefaults(
 
 const id = Math.round(Math.random() * 999);
 
-provide(gridPatternInjectionKey, props);
+provide(gridPatternCtxKey, props);
 </script>
 
 <template>

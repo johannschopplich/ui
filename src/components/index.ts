@@ -1,3 +1,6 @@
+import DetailsContent from "./DetailsContent.vue";
+import DetailsGroup from "./DetailsGroup.vue";
+import DetailsItem from "./DetailsItem.vue";
 import DotPattern from "./DotPattern.vue";
 import GridBlock from "./GridBlock.vue";
 import GridPattern from "./GridPattern.vue";
@@ -15,6 +18,9 @@ import TextReveal from "./TextReveal.vue";
 import TextRevealToken from "./TextRevealToken.vue";
 
 export {
+  DetailsContent,
+  DetailsGroup,
+  DetailsItem,
   DotPattern,
   GridBlock,
   GridPattern,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, provide, ref } from "vue";
-import { scrollTriggerInjectionKey } from "./context";
+import { scrollTriggerCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
@@ -19,7 +19,7 @@ onMounted(() => {
 });
 
 // Provide peers
-provide(scrollTriggerInjectionKey, children);
+provide(scrollTriggerCtxKey, children);
 </script>
 
 <template>
