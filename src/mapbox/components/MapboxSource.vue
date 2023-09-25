@@ -15,7 +15,7 @@ watch(
   (newValue) => {
     if (newValue) {
       const source = map.value?.getSource(props.id) as GeoJSONSource;
-      // @ts-expect-error: mapbox-gl types are incorrect
+      // @ts-expect-error: Mapbox GL types are incorrect
       source?.setData(newValue);
     }
   },

@@ -78,7 +78,7 @@ const props = withDefaults(
     bearingSnap: 7,
     bounds: undefined,
     boxZoom: true,
-    // @ts-expect-error: type mismatch
+    // @ts-expect-error: Type mismatch
     center: [0, 0],
     clickTolerance: 3,
     collectResourceTiming: false,

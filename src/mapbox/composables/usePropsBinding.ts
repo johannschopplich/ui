@@ -31,7 +31,7 @@ export function usePropsBinding<T extends Evented>(
         watch(
           () => props[prop],
           (newValue) => {
-            // @ts-expect-error: expression is not callable
+            // @ts-expect-error: Expression is not callable
             element[setMethodName as keyof T](newValue);
           },
           {
