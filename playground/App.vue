@@ -9,6 +9,8 @@ import {
   ModalsPortal,
   MotionText,
   ScrollObserver,
+  ScrollReactor,
+  ScrollReactorGroup,
   ScrollReveal,
   ScrollTrigger,
   ScrollTriggerGroup,
@@ -43,7 +45,7 @@ async function openModal() {
       once
     >
       <h1
-        :class="{ 'translate-y-8 opacity-0': !isActive }"
+        :class="[!isActive && 'translate-y-8 opacity-0']"
         class="mb-6 from-lime-300 to-green-400 bg-gradient-to-r bg-clip-text text-center text-xl font-medium transition-transform,opacity duration-[--duration] md:text-3xl"
       >
         Playground
@@ -62,10 +64,7 @@ async function openModal() {
             v-for="(item, index) in 4"
             :key="index"
             :style="{ '--delay': `${(index + 1) * 250}ms` }"
-            :class="{
-              'translate-y-8 opacity-0': !isActive,
-              'delay-[--delay]': isActive,
-            }"
+            :class="[isActive ? 'delay-[--delay]' : 'translate-y-8 opacity-0']"
             class="relative aspect-1/1 w-full bg-gray-200 transition-transform,opacity duration-[--duration]"
           >
             <DotPattern
@@ -97,24 +96,74 @@ async function openModal() {
             :index="index"
           >
             <span
-              :class="{
-                'opacity-10': !isActive,
-              }"
+              :class="[!isActive && 'opacity-10']"
               class="transition"
-              v-html="token"
+              v-text="token"
             />
           </TextRevealToken>
         </div>
       </div>
     </TextReveal>
 
+    <ScrollObserver class="relative grid grid-cols-2 gap-8">
+      <ScrollTriggerGroup class="py-[50vh]">
+        <ScrollTrigger
+          v-for="(item, index) in text.split('.').slice(0, 3)"
+          :key="index"
+          v-slot="{ isActive }"
+          class="py-8"
+        >
+          <div :class="[!isActive && 'text-black/30']" class="transition">
+            <div class="text-2xl font-medium leading-snug">
+              Feature Number {{ index + 1 }}
+            </div>
+
+            <div class="mt-4 text-base opacity-75">
+              {{ item }}
+            </div>
+          </div>
+        </ScrollTrigger>
+      </ScrollTriggerGroup>
+
+      <ScrollReactorGroup
+        class="sticky top-0 h-[100svh] flex items-center justify-center"
+      >
+        <ScrollReactor
+          v-for="(item, index) in text.split('.').slice(0, 3)"
+          :key="index"
+          v-slot="{ show, faded }"
+          class="absolute inset-0 flex items-center justify-center"
+        >
+          <div
+            class="relative h-64 w-64 overflow-hidden rounded-2xl bg-black/5 p-12 transition"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-b transition"
+              :class="[
+                index === 0 && 'from-purple-100 to-indigo-300',
+                index === 1 && 'from-yellow-100 to-amber-300',
+                index === 2 && 'from-lime-100 to-green-300',
+                !show && 'opacity-0',
+                faded && 'opacity-0',
+              ]"
+            />
+          </div>
+        </ScrollReactor>
+      </ScrollReactorGroup>
+    </ScrollObserver>
+
     <ScrollReveal
       v-slot="{ isActive }"
       mode="middle"
       class="h-[100svh] flex items-center"
+      once
     >
-      <MotionText v-slot="{ tokens }" :body="text" mode="symbol">
-        <h1 class="text-center text-4xl font-bold">
+      <MotionText
+        v-slot="{ tokens }"
+        :body="text.split('.', 1)[0] + '.'"
+        mode="symbol"
+      >
+        <h2 class="text-4xl font-bold">
           <span
             v-for="(token, index) in tokens"
             :key="index"
@@ -122,14 +171,11 @@ async function openModal() {
               '--delay': `${index * 20}ms`,
             }"
             class="inline-block whitespace-pre-wrap transition-transform,opacity"
-            :class="{
-              'translate-y-8 opacity-0': !isActive,
-              'delay-[--delay]': isActive,
-            }"
+            :class="[isActive ? 'delay-[--delay]' : 'translate-y-8 opacity-0']"
           >
             {{ token }}
           </span>
-        </h1>
+        </h2>
       </MotionText>
     </ScrollReveal>
 
@@ -138,7 +184,7 @@ async function openModal() {
         <ScrollTrigger v-slot="{ isActive }" class="relative">
           <span
             class="absolute inset-0 transition"
-            :class="{ 'opacity-0': !isActive }"
+            :class="[!isActive && 'opacity-0']"
           >
             Lorem
             <span
@@ -151,7 +197,7 @@ async function openModal() {
 
           <span
             class="relative text-black/20 transition"
-            :class="{ 'opacity-0': isActive }"
+            :class="[isActive && 'opacity-0']"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </span>
@@ -160,7 +206,7 @@ async function openModal() {
         <ScrollTrigger v-slot="{ isActive }" class="relative">
           <span
             class="absolute inset-0 transition"
-            :class="{ 'opacity-0': !isActive }"
+            :class="[!isActive && 'opacity-0']"
           >
             <span
               class="from-yellow-300 to-amber-400 bg-gradient-to-r bg-clip-text text-transparent transition"
@@ -173,7 +219,7 @@ async function openModal() {
 
           <span
             class="relative text-black/20 transition"
-            :class="{ 'opacity-0': isActive }"
+            :class="[isActive && 'opacity-0']"
           >
             Optio veritatis iure laborum alias necessitatibus, animi ad, placeat
             adipisci voluptatibus ipsam provident nisi.
@@ -183,7 +229,7 @@ async function openModal() {
         <ScrollTrigger v-slot="{ isActive }" class="relative">
           <span
             class="absolute inset-0 transition"
-            :class="{ 'opacity-0': !isActive }"
+            :class="[!isActive && 'opacity-0']"
           >
             Minus culpa saepe reiciendis
             <span
@@ -196,7 +242,7 @@ async function openModal() {
 
           <span
             class="relative text-black/20 transition"
-            :class="{ 'opacity-0': isActive }"
+            :class="[isActive && 'opacity-0']"
           >
             Minus culpa saepe reiciendis, porro tempore ab reprehenderit!
           </span>
@@ -232,7 +278,7 @@ async function openModal() {
 
           <div class="relative ml-auto">
             <span
-              :class="{ 'rotate-180': isActive, 'rotate-45': !isActive }"
+              :class="[isActive ? 'rotate-180' : 'rotate-45']"
               class="i-ph:x-circle h-6 w-6 text-black/50 transition-transform duration-500"
             />
           </div>
