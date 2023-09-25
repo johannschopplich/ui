@@ -26,6 +26,15 @@ export default defineNuxtConfig({
   build: {
     transpile: ["@byjohann/ui"],
   },
+
+  imports: {
+    presets: [
+      {
+        from: "@byjohann/ui",
+        imports: ["useModals"],
+      },
+    ],
+  },
 });
 ```
 

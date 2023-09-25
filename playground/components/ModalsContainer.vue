@@ -14,7 +14,7 @@ onKeyStroke("Escape", () => emit("close"));
 
 <template>
   <div
-    class="fixed inset-0 z-110 overflow-y-auto"
+    class="fixed inset-0 z-10 overflow-y-auto"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
