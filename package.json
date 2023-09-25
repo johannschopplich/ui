@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@byjohann/eslint-config": "^0.2.2",
+    "@iconify-json/ph": "^1.1.6",
     "@julr/unocss-preset-forms": "^0.0.5",
     "@types/node": "^20.6.4",
     "@unocss/eslint-config": "^0.56.1",

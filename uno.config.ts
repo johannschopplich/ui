@@ -1,6 +1,6 @@
-import { defineConfig, presetWind } from "unocss";
+import { defineConfig, presetIcons, presetWind } from "unocss";
 import { presetForms } from "@julr/unocss-preset-forms";
 
 export default defineConfig({
-  presets: [presetWind(), presetForms()],
+  presets: [presetWind(), presetForms(), presetIcons()],
 });

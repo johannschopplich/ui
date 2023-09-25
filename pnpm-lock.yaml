@@ -11,6 +11,9 @@ importers:
       '@byjohann/eslint-config':
         specifier: ^0.2.2
         version: 0.2.2(eslint@8.50.0)(typescript@5.2.2)
+      '@iconify-json/ph':
+        specifier: ^1.1.6
+        version: 1.1.6
       '@julr/unocss-preset-forms':
         specifier: ^0.0.5
         version: 0.0.5(unocss@0.56.1)
@@ -757,6 +760,12 @@ packages:
 
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/ph@1.1.6:
+    resolution: {integrity: sha512-dexzEndlXQX/sbQhnEpA94Pby6JCGV2tZToSGcPPQpbilDGyk5VMd0ymusYoocRAn6+qLpGRvMoz5XFKGqP+VA==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify/types@2.0.0:
