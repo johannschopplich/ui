@@ -42,7 +42,7 @@ function close(value?: string | MouseEvent) {
         v-model="email"
         type="email"
         name="email"
-        class="block w-full border-0 rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset sm:text-sm sm:leading-6 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset"
+        class="block w-full border-0 rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset sm:text-sm sm:leading-6 placeholder:text-gray-400 focus:ring-2 focus:ring-rose-600 focus:ring-inset"
         placeholder="you@example.com"
       />
     </div>
@@ -50,7 +50,7 @@ function close(value?: string | MouseEvent) {
     <div class="mt-5 sm:mt-6">
       <button
         type="button"
-        class="w-full inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 focus-visible:outline"
+        class="w-full inline-flex justify-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline-2 focus-visible:outline-rose-600 focus-visible:outline-offset-2 focus-visible:outline"
         @click="close(email)"
       >
         OK

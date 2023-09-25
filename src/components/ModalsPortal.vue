@@ -11,10 +11,9 @@ const { modals } = useModals(props.scope);
 <template>
   <div class="relative z-100">
     <Transition name="background-fade">
-      <div
-        v-if="modals.length"
-        class="fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm"
-      />
+      <slot v-if="modals.length">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm" />
+      </slot>
     </Transition>
 
     <TransitionGroup name="content-fade">

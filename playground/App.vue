@@ -216,6 +216,7 @@ async function openModal() {
         </div>
       </Marquee>
     </aside>
+
     <DetailsGroup class="space-y-5">
       <DetailsItem
         v-for="(item, index) in 5"
@@ -254,3 +255,9 @@ async function openModal() {
 
   <ModalsPortal />
 </template>
+
+<style>
+body {
+  overflow-x: hidden;
+}
+</style>

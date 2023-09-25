@@ -13,7 +13,6 @@ withDefaults(
 );
 
 const active = ref<number | undefined>();
-
 const previous = usePrevious(active, 0);
 
 provide(scrollObserverCtxKey, {
