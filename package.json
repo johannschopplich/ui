@@ -28,6 +28,10 @@
     "./composables": {
       "types": "./dist/composables/index.d.ts",
       "import": "./dist/composables/index.mjs"
+    },
+    "./mapbox": {
+      "types": "./dist/mapbox/index.d.ts",
+      "import": "./dist/mapbox/index.mjs"
     }
   },
   "types": "./dist/index.d.ts",
@@ -58,6 +62,11 @@
   "peerDependencies": {
     "@vueuse/core": "*",
     "vue": "^3"
+  },
+  "dependencies": {
+    "@types/mapbox-gl": "^2.7.14",
+    "mapbox-gl": "^2.15.0",
+    "scule": "^1.0.0"
   },
   "devDependencies": {
     "@byjohann/eslint-config": "^0.2.2",
