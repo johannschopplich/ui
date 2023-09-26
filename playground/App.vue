@@ -52,7 +52,10 @@ async function openModal() {
       >
         Playground
       </h1>
-      <p class="text-center">
+      <p
+        class="text-center transition-transform,opacity duration-[--duration]"
+        :class="[!isActive && 'translate-y-8 opacity-0']"
+      >
         <button
           class="group mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-100 px-5 py-2.5 text-xs font-medium tracking-wide transition md:mt-8 hover:bg-gray-200"
           @click="openModal()"
@@ -186,23 +189,25 @@ async function openModal() {
       </MotionText>
     </ScrollReveal>
 
-    <SliderGroup class="scroll-pl-6 gap-6 px-6">
-      <SliderItem
-        v-for="i in 5"
-        :key="i"
-        v-slot="{ isActive }"
-        class="w-[calc(100%-4.5rem)]"
-      >
-        <div
-          class="aspect-[4/1] rounded-2xl"
-          :class="[
-            isActive
-              ? 'from-red-300 to-rose-400 bg-gradient-to-r'
-              : 'bg-gray-200',
-          ]"
-        />
-      </SliderItem>
-    </SliderGroup>
+    <div class="relative ml-[calc(50%-50vw)] w-[100vw]">
+      <SliderGroup class="scroll-pl-6 gap-6 px-6">
+        <SliderItem
+          v-for="i in 10"
+          :key="i"
+          v-slot="{ isActive }"
+          class="w-[calc(100%-4.5rem)]"
+        >
+          <div
+            class="aspect-[4/1] rounded-2xl"
+            :class="[
+              isActive
+                ? 'from-red-300 to-rose-400 bg-gradient-to-r'
+                : 'bg-gray-200',
+            ]"
+          />
+        </SliderItem>
+      </SliderGroup>
+    </div>
 
     <ScrollObserver class="relative h-[100svh] flex items-center">
       <ScrollTriggerGroup class="text-3xl space-y-3">

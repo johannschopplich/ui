@@ -9,7 +9,7 @@ import { sliderCtxKey } from "./context";
 
 const props = withDefaults(
   defineProps<{
-    trigger?: "visible" | "start" | "middle";
+    trigger?: "visible" | "middle";
   }>(),
   {
     trigger: "middle",
@@ -21,31 +21,34 @@ const emit = defineEmits<{
 }>();
 
 const isActive = ref(false);
-const container = ref<HTMLElement | undefined>();
+const slide = ref<HTMLElement | undefined>();
 const context = inject(sliderCtxKey)!;
 
-const { x, width } = useElementBounding(container);
+const { left, width } = useElementBounding(slide);
+const { left: parentLeft } = useElementBounding(context.container);
 const { width: parentWidth } = useElementSize(context.container, undefined, {
   box: "border-box",
 });
-const isVisible = useElementVisibility(container, {
+const isVisible = useElementVisibility(slide, {
   scrollTarget: context.container,
 });
 
 const isIntersecting = computed(() => {
-  if (props.trigger === "start") {
-    return isVisible.value && x.value <= parentWidth.value;
-  } else if (props.trigger === "middle") {
+  // Account for slider margin if centered on the page
+  const relativeLeft = left.value - parentLeft.value;
+
+  if (props.trigger === "middle") {
     return (
-      x.value + width.value / 2 > parentWidth.value / 2 - width.value / 2 &&
-      x.value + width.value / 2 < parentWidth.value / 2 + width.value / 2
+      relativeLeft + width.value / 2 >
+        parentWidth.value / 2 - width.value / 2 &&
+      relativeLeft + width.value / 2 < parentWidth.value / 2 + width.value / 2
     );
   }
 
   return (
     isVisible.value &&
-    x.value >= 0 &&
-    x.value + width.value <= parentWidth.value
+    relativeLeft >= 0 &&
+    relativeLeft + width.value <= parentWidth.value
   );
 });
 
@@ -53,7 +56,7 @@ watch(isIntersecting, (value) => {
   isActive.value = value;
 
   if (value) {
-    const index = context.peers.value.indexOf(container.value!);
+    const index = context.peers.value.indexOf(slide.value!);
     context.currentIndex.value = index;
     emit("update:activeIndex", index);
   }
@@ -61,7 +64,7 @@ watch(isIntersecting, (value) => {
 </script>
 
 <template>
-  <div ref="container" class="shrink-0 snap-start snap-always">
+  <div ref="slide" class="shrink-0 snap-start snap-always">
     <slot :is-active="isActive" />
   </div>
 </template>
