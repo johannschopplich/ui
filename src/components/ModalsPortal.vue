@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { useModals } from "../composables/modals";
+// Explizit import from the package itself, because otherwise the modals context
+// gets lost when used in Nuxt die to build transpilation.
+// import { useModals } from "../composables/modals";
+import { useModals } from "@byjohann/ui";
 
 const props = defineProps<{
   scope?: string;
