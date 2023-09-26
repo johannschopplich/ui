@@ -23,10 +23,11 @@ export default defineNuxtModule<ModuleOptions>({
       imports: ["useModals"],
     });
 
-    const hasMapboxGL = await tryResolveModule("mapgox-gl", [
+    const hasMapboxGL = await tryResolveModule("mapbox-gl", [
       nuxt.options.rootDir,
     ]);
     if (hasMapboxGL) {
+      // Prefer the unminified version of `mapbox-gl`
       nuxt.options.alias["mapbox-gl"] =
         "mapbox-gl/dist/mapbox-gl-unminified.js";
 
