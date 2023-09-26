@@ -4,6 +4,7 @@ import { useLocalStorage, useScroll, watchDebounced } from "@vueuse/core";
 import { sliderCtxKey } from "./context";
 
 const props = defineProps<{
+  /** @default false */
   persistPosition?: boolean;
 }>();
 
@@ -14,12 +15,6 @@ const emit = defineEmits<{
 const container = ref<HTMLElement | undefined>();
 const children = ref<Element[]>([]);
 const currentIndex = ref(0);
-
-const { x } = useScroll(container);
-const scrollStorage = useLocalStorage<Record<"x" | "y", number>>(
-  "app.components.slider.scroll",
-  { x: 0, y: 0 },
-);
 
 // Provide peers
 provide(sliderCtxKey, {
@@ -37,6 +32,12 @@ watch(currentIndex, (value) => {
 });
 
 if (props.persistPosition) {
+  const { x } = useScroll(container);
+  const scrollStorage = useLocalStorage<Record<"x" | "y", number>>(
+    "app.components.slider.scroll",
+    { x: 0, y: 0 },
+  );
+
   watchDebounced(
     x,
     (value) => {

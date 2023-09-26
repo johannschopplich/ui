@@ -9,6 +9,7 @@ import { sliderCtxKey } from "./context";
 
 const props = withDefaults(
   defineProps<{
+    /** @default "middle" */
     trigger?: "visible" | "middle";
   }>(),
   {
