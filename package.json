@@ -33,6 +33,10 @@
       "types": "./dist/mapbox/index.d.ts",
       "import": "./dist/mapbox/index.mjs"
     },
+    "./nuxt": {
+      "types": "./dist/nuxt/index.d.ts",
+      "import": "./dist/nuxt/index.mjs"
+    },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.mjs"
@@ -68,6 +72,9 @@
     "@vueuse/core": "*",
     "mapbox-gl": "^2.15.0",
     "vue": "^3"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.7.4"
   },
   "devDependencies": {
     "@byjohann/eslint-config": "^0.2.2",
