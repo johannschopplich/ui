@@ -15,9 +15,9 @@ const props = withDefaults(
   },
 );
 
-const id = Math.round(Math.random() * 999);
-
 provide(gridPatternCtxKey, props);
+
+const id = Math.floor(Math.random() * 100000);
 </script>
 
 <template>
