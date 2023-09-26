@@ -7,8 +7,13 @@ const props = defineProps<{
   persistPosition?: boolean;
 }>();
 
+const emit = defineEmits<{
+  (event: "update:activeIndex", value: number): void;
+}>();
+
 const container = ref<HTMLElement | undefined>();
 const children = ref<Element[]>([]);
+const currentIndex = ref(0);
 
 const { x } = useScroll(container);
 const scrollStorage = useLocalStorage<Record<"x" | "y", number>>(
@@ -17,17 +22,21 @@ const scrollStorage = useLocalStorage<Record<"x" | "y", number>>(
 );
 
 // Provide peers
-provide(sliderCtxKey, { container, peers: children });
+provide(sliderCtxKey, {
+  container,
+  peers: children,
+  currentIndex,
+});
 
 watch(container, (value) => {
   children.value = Array.from(value?.children ?? []);
 });
 
-if (props.persistPosition) {
-  onMounted(() => {
-    x.value = scrollStorage.value.x;
-  });
+watch(currentIndex, (value) => {
+  emit("update:activeIndex", value);
+});
 
+if (props.persistPosition) {
   watchDebounced(
     x,
     (value) => {
@@ -35,6 +44,10 @@ if (props.persistPosition) {
     },
     { debounce: 500 },
   );
+
+  onMounted(() => {
+    x.value = scrollStorage.value.x;
+  });
 }
 </script>
 

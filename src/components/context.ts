@@ -21,6 +21,7 @@ export interface ScrollObserverContext {
 export interface SliderContext {
   container: Ref<HTMLElement | undefined>;
   peers: Ref<Element[]>;
+  currentIndex: Ref<number>;
 }
 
 export interface TextRevealContext {

@@ -17,16 +17,13 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (event: "update:itemIndex", value: number): void;
+  (event: "update:activeIndex", value: number): void;
 }>();
 
 const isActive = ref(false);
 const container = ref<HTMLElement | undefined>();
 const context = inject(sliderCtxKey)!;
 
-const itemIndex = computed(() =>
-  container.value ? context.peers.value.indexOf(container.value) : 0,
-);
 const { x, width } = useElementBounding(container);
 const { width: parentWidth } = useElementSize(context.container, undefined, {
   box: "border-box",
@@ -56,7 +53,9 @@ watch(isIntersecting, (value) => {
   isActive.value = value;
 
   if (value) {
-    emit("update:itemIndex", itemIndex.value);
+    const index = context.peers.value.indexOf(container.value!);
+    context.currentIndex.value = index;
+    emit("update:activeIndex", index);
   }
 });
 </script>

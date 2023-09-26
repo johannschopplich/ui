@@ -186,15 +186,23 @@ async function openModal() {
       </MotionText>
     </ScrollReveal>
 
-    <div class="relative ml-[calc(50%-50vw)] w-[100vw]">
-      <SliderGroup class="scroll-pl-6 gap-6 px-6">
-        <SliderItem v-for="i in 5" :key="i">
-          <div
-            class="relative aspect-[4/1] w-[calc(100vw-4.5rem)] animate-pulse rounded-2xl bg-gray-200"
-          />
-        </SliderItem>
-      </SliderGroup>
-    </div>
+    <SliderGroup class="scroll-pl-6 gap-6 px-6">
+      <SliderItem
+        v-for="i in 5"
+        :key="i"
+        v-slot="{ isActive }"
+        class="w-[calc(100%-4.5rem)]"
+      >
+        <div
+          class="aspect-[4/1] rounded-2xl"
+          :class="[
+            isActive
+              ? 'from-red-300 to-rose-400 bg-gradient-to-r'
+              : 'bg-gray-200',
+          ]"
+        />
+      </SliderItem>
+    </SliderGroup>
 
     <ScrollObserver class="relative h-[100svh] flex items-center">
       <ScrollTriggerGroup class="text-3xl space-y-3">
