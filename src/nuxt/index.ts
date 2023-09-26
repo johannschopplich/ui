@@ -2,6 +2,7 @@ import {
   addImportsSources,
   defineNuxtModule,
   extendViteConfig,
+  tryResolveModule,
 } from "@nuxt/kit";
 
 export interface ModuleOptions {}
@@ -12,7 +13,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: "ui",
   },
   defaults: {},
-  setup(options, nuxt) {
+  async setup(options, nuxt) {
     // Transpile the Vue.js components
     nuxt.options.build.transpile.push("@byjohann/ui");
 
@@ -22,12 +23,20 @@ export default defineNuxtModule<ModuleOptions>({
       imports: ["useModals"],
     });
 
-    extendViteConfig((config) => {
-      config.optimizeDeps ||= {};
-      config.optimizeDeps.include ||= [];
+    const hasMapboxGL = await tryResolveModule("mapgox-gl", [
+      nuxt.options.rootDir,
+    ]);
+    if (hasMapboxGL) {
+      nuxt.options.alias["mapbox-gl"] =
+        "mapbox-gl/dist/mapbox-gl-unminified.js";
 
-      // Transform CJS packages to ESM
-      config.optimizeDeps.include.push("mapbox-gl");
-    });
+      extendViteConfig((config) => {
+        config.optimizeDeps ||= {};
+        config.optimizeDeps.include ||= [];
+
+        // Transform CJS packages to ESM
+        config.optimizeDeps.include.push("mapbox-gl");
+      });
+    }
   },
 });
