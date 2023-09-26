@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Explicit import from the package itself, because otherwise the modals context
-// gets lost when used in Nuxt die to build transpilation.
+// gets lost when used in Nuxt due to build transpilation.
 // import { useModals } from "../composables/modals";
 import { useModals } from "@byjohann/ui";
 
