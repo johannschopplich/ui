@@ -3,6 +3,8 @@ import { onMounted, provide, ref, watch } from "vue";
 import { useLocalStorage, useScroll, watchDebounced } from "@vueuse/core";
 import { sliderCtxKey } from "./context";
 
+defineOptions({ inheritAttrs: false });
+
 const props = defineProps<{
   /** @default false */
   persistPosition?: boolean;
@@ -54,11 +56,14 @@ if (props.persistPosition) {
 
 <template>
   <div
+    v-bind="$attrs"
     ref="container"
     class="slider-track relative w-full flex snap-x snap-mandatory overflow-x-auto"
   >
     <slot />
   </div>
+
+  <slot name="pagination" />
 </template>
 
 <style scoped>

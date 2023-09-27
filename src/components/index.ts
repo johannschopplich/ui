@@ -15,6 +15,7 @@ import ScrollTrigger from "./ScrollTrigger.vue";
 import ScrollTriggerGroup from "./ScrollTriggerGroup.vue";
 import SliderGroup from "./SliderGroup.vue";
 import SliderItem from "./SliderItem.vue";
+import SliderPagination from "./SliderPagination.vue";
 import ScrollReveal from "./ScrollReveal.vue";
 import SpotlightCard from "./SpotlightCard.vue";
 import TextReveal from "./TextReveal.vue";
@@ -38,6 +39,7 @@ export {
   ScrollTriggerGroup,
   SliderGroup,
   SliderItem,
+  SliderPagination,
   ScrollReveal,
   SpotlightCard,
   TextReveal,

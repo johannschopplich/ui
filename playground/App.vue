@@ -16,6 +16,7 @@ import {
   ScrollTriggerGroup,
   SliderGroup,
   SliderItem,
+  SliderPagination,
   TextReveal,
   TextRevealToken,
 } from "../src/components";
@@ -206,6 +207,10 @@ async function openModal() {
             ]"
           />
         </SliderItem>
+
+        <template #pagination>
+          <SliderPagination />
+        </template>
       </SliderGroup>
     </div>
 
