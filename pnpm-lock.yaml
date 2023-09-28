@@ -18,6 +18,9 @@ importers:
       mapbox-gl:
         specifier: ^2.15.0
         version: 2.15.0
+      medium-zoom:
+        specifier: ^1.0.8
+        version: 1.0.8
     devDependencies:
       '@byjohann/eslint-config':
         specifier: ^0.2.2
@@ -3367,6 +3370,12 @@ packages:
   /mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
     dev: true
+
+  /medium-zoom@1.0.8:
+    resolution: {integrity: sha512-CjFVuFq/IfrdqesAXfg+hzlDKu6A2n80ZIq0Kl9kWjoHh9j1N9Uvk5X0/MmN0hOfm5F9YBswlClhcwnmtwz7gA==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /memory-fs@0.5.0:
     resolution: {integrity: sha512-jA0rdU5KoQMC0e6ppoNRtpp6vjFq6+NY7r8hywnC7V+1Xj/MtHwGIbB1QaK/dunyjWteJzmkpd7ooeWg10T7GA==}
