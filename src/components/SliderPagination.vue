@@ -3,7 +3,6 @@ import { computed, inject } from "vue";
 import { sliderCtxKey } from "./context";
 
 const props = defineProps<{
-  /** @default undefined */
   pagination?: number;
 }>();
 
