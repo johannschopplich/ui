@@ -4,9 +4,17 @@ import mediumZoom from "medium-zoom";
 import type { ComponentPublicInstance } from "vue";
 import type { Zoom, ZoomOptions } from "medium-zoom";
 
-const props = defineProps<{
-  options?: ZoomOptions;
-}>();
+const props = withDefaults(
+  defineProps<{
+    /** @default "img" */
+    as?: string;
+    options?: ZoomOptions;
+  }>(),
+  {
+    as: "img",
+    options: undefined,
+  },
+);
 
 let zoom: Zoom | undefined = undefined;
 
@@ -18,12 +26,10 @@ watch(
   },
 );
 
-function getZoom() {
-  return (zoom ??= mediumZoom(props.options));
-}
-
 function attachZoom(ref: Element | ComponentPublicInstance | null) {
-  const image = ref as HTMLImageElement | null;
+  // Check if ref is component instance
+  const image = ((ref as ComponentPublicInstance)?.$el ??
+    ref) as HTMLImageElement | null;
   const zoom = getZoom();
 
   if (image) {
@@ -32,8 +38,12 @@ function attachZoom(ref: Element | ComponentPublicInstance | null) {
     zoom.detach();
   }
 }
+
+function getZoom() {
+  return (zoom ??= mediumZoom(props.options));
+}
 </script>
 
 <template>
-  <img :ref="attachZoom" />
+  <component :is="as" :ref="attachZoom" />
 </template>
