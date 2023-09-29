@@ -1,9 +1,6 @@
 import { markRaw, ref } from "vue";
-import type { ComponentPublicInstance, Ref } from "vue";
-
-type ComponentConstructor = new (
-  ...args: any[]
-) => ComponentPublicInstance<any>;
+import type { Ref } from "vue";
+import type { ComponentConstructor } from "../types";
 
 interface Modal {
   id: string;

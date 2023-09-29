@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { watch } from "vue";
 import mediumZoom from "medium-zoom";
-import type { ComponentPublicInstance } from "vue";
 import type { Zoom, ZoomOptions } from "medium-zoom";
-
-type Component = new (...args: any[]) => ComponentPublicInstance<any>;
+import type { ComponentPublicInstance } from "vue";
+import type { ComponentConstructor } from "../types";
 
 const props = withDefaults(
   defineProps<{
     /** @default "img" */
-    as?: string | Component;
+    as?: string | ComponentConstructor;
     options?: ZoomOptions;
   }>(),
   {
