@@ -19,6 +19,7 @@ import {
   SliderPagination,
   TextReveal,
   TextRevealToken,
+  TextShimmer,
 } from "../src/components";
 import { useModals } from "../src/composables/modals";
 import TextModal from "./components/TextModal.vue";
@@ -51,8 +52,11 @@ async function openModal() {
         :class="[!isActive && 'translate-y-8 opacity-0']"
         class="mb-6 from-lime-300 to-green-400 bg-gradient-to-r bg-clip-text text-center text-xl font-medium transition-transform,opacity duration-[--duration] md:text-3xl"
       >
-        Playground
+        @byjohann/ui
       </h1>
+      <TextShimmer as="h2" class="text-center" style="--shimmer-duration: 5s">
+        A collection of Vue.js components for my projects
+      </TextShimmer>
       <p
         class="text-center transition-transform,opacity duration-[--duration]"
         :class="[!isActive && 'translate-y-8 opacity-0']"

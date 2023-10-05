@@ -21,6 +21,7 @@ import ScrollReveal from "./ScrollReveal.vue";
 import SpotlightCard from "./SpotlightCard.vue";
 import TextReveal from "./TextReveal.vue";
 import TextRevealToken from "./TextRevealToken.vue";
+import TextShimmer from "./TextShimmer.vue";
 
 export {
   DetailsContent,
@@ -46,4 +47,5 @@ export {
   SpotlightCard,
   TextReveal,
   TextRevealToken,
+  TextShimmer,
 };
