@@ -18,7 +18,7 @@ withDefaults(
 <template>
   <component
     :is="as"
-    class="text-shimmer bg-[length:250%_100%] bg-clip-text text-transparent"
+    class="text-shimmer"
     :style="{
       '--shimmer-from': from,
       '--shimmer-to': to,
@@ -30,6 +30,22 @@ withDefaults(
 </template>
 
 <style scoped>
+.text-shimmer {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    110deg,
+    var(--shimmer-from),
+    45%,
+    var(--shimmer-to),
+    55%,
+    var(--shimmer-from)
+  );
+  background-size: 250% 100%;
+  animation: text-shimmer var(--shimmer-duration) ease-out infinite alternate;
+}
+
 @keyframes text-shimmer {
   from {
     background-position: 0 0;
@@ -37,17 +53,5 @@ withDefaults(
   to {
     background-position: -200% 0;
   }
-}
-
-.text-shimmer {
-  animation: text-shimmer var(--shimmer-duration) ease-out infinite alternate;
-  background-image: linear-gradient(
-    110deg,
-    var(--shimmer-from,),
-    45%,
-    var(--shimmer-to,),
-    55%,
-    var(--shimmer-from)
-  );
 }
 </style>

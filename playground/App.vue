@@ -54,7 +54,12 @@ async function openModal() {
       >
         @byjohann/ui
       </h1>
-      <TextShimmer as="h2" class="text-center" style="--shimmer-duration: 5s">
+      <TextShimmer
+        as="h2"
+        class="text-center transition-transform,opacity duration-[--duration]"
+        :class="[!isActive && 'translate-y-8 opacity-0']"
+        duration="3.5s"
+      >
         A collection of Vue.js components for my projects
       </TextShimmer>
       <p
