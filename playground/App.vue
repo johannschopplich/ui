@@ -50,7 +50,7 @@ async function openModal() {
     >
       <h1
         :class="[!isActive && 'translate-y-8 opacity-0']"
-        class="mb-6 from-lime-300 to-green-400 bg-gradient-to-r bg-clip-text text-center text-xl font-medium transition-transform,opacity duration-[--duration] md:text-3xl"
+        class="mb-6 from-lime-300 to-green-400 bg-gradient-to-r bg-clip-text text-center text-xl font-semibold transition-transform,opacity duration-[--duration] md:text-4xl"
       >
         @byjohann/ui
       </h1>
