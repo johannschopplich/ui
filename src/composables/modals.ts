@@ -1,5 +1,6 @@
 import { markRaw, ref } from "vue";
 import type { Ref } from "vue";
+import { generateRandomString } from "../utils";
 import type { ComponentConstructor } from "../types";
 
 interface Modal {
@@ -23,7 +24,7 @@ export function useModals(scope = "") {
     bindings: Bindings<T>,
   ) {
     return new Promise<ReturnValue<T>>((resolve) => {
-      const id = crypto.randomUUID();
+      const id = generateRandomString();
 
       modals.value.push({
         id,
@@ -31,8 +32,7 @@ export function useModals(scope = "") {
         bindings: {
           onClose: (data: any) => {
             resolve(data);
-            const index = modals.value.findIndex((modal) => modal.id === id);
-            if (index !== -1) modals.value.splice(index, 1);
+            close(id);
           },
           ...bindings,
         },
@@ -40,8 +40,14 @@ export function useModals(scope = "") {
     });
   }
 
+  function close(id: string) {
+    const index = modals.value.findIndex((modal) => modal.id === id);
+    if (index !== -1) modals.value.splice(index, 1);
+  }
+
   return {
     modals,
     open,
+    close,
   };
 }

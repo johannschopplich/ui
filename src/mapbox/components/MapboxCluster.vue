@@ -158,6 +158,7 @@ function clustersClickHandler(event: MapLayerMouseEvent) {
 
   source.getClusterExpansionZoom(clusterId, (error, zoom) => {
     if (error) return;
+
     map.value!.easeTo({
       center: (feature.geometry as GeoJSON.Point).coordinates as [
         number,
