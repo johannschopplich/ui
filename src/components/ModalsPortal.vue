@@ -12,7 +12,7 @@ const { modals } = useModals(props.scope);
 </script>
 
 <template>
-  <div class="relative z-100">
+  <div class="relative z-[100]">
     <Transition name="background-fade">
       <slot v-if="modals.length">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm" />
