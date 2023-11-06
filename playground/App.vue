@@ -36,7 +36,7 @@ async function openModal() {
     email: email.value,
   });
 
-  if (newValue !== undefined) email.value = newValue;
+  if (newValue != null) email.value = newValue;
 }
 </script>
 
