@@ -180,7 +180,7 @@ async function openModal() {
     >
       <MotionText
         v-slot="{ tokens }"
-        :body="text.split('.', 1)[0] + '.'"
+        :body="`${text.split('.', 1)[0]}.`"
         mode="symbol"
       >
         <h2 class="text-4xl font-bold">
