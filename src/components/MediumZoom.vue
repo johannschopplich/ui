@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { watch } from "vue";
-import mediumZoom from "medium-zoom";
+import mediumZoom from "medium-zoom/dist/pure";
 import type { Zoom, ZoomOptions } from "medium-zoom";
 import type { ComponentPublicInstance } from "vue";
 import type { ComponentConstructor } from "../types";
+
+import "medium-zoom/dist/style.css";
 
 const props = withDefaults(
   defineProps<{

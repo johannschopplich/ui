@@ -2,7 +2,7 @@
   "name": "@byjohann/ui",
   "type": "module",
   "version": "0.5.6",
-  "packageManager": "pnpm@8.10.2",
+  "packageManager": "pnpm@8.10.5",
   "description": "A collection of Vue.js components for my projects",
   "author": "Johann Schopplich <pkg@johannschopplich.com>",
   "license": "MIT",
@@ -72,9 +72,9 @@
     "vue": "^3"
   },
   "optionalDependencies": {
-    "@types/mapbox-gl": "^2.7.17",
+    "@types/mapbox-gl": "^2.7.18",
     "mapbox-gl": "^2.15.0",
-    "medium-zoom": "^1.0.8"
+    "medium-zoom": "^1.1.0"
   },
   "dependencies": {
     "@nuxt/kit": "^3.8.1"
@@ -82,19 +82,19 @@
   "devDependencies": {
     "@byjohann/eslint-config": "^0.3.0",
     "@iconify-json/ph": "^1.1.6",
-    "@julr/unocss-preset-forms": "^0.0.5",
-    "@types/node": "^20.8.10",
-    "@unocss/eslint-config": "^0.57.2",
-    "@unocss/reset": "^0.57.2",
-    "@vitejs/plugin-vue": "^4.4.0",
-    "@vueuse/core": "^10.5.0",
+    "@julr/unocss-preset-forms": "^0.1.0",
+    "@types/node": "^20.9.1",
+    "@unocss/eslint-config": "^0.57.5",
+    "@unocss/reset": "^0.57.5",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vueuse/core": "^10.6.1",
     "bumpp": "^9.2.0",
-    "eslint": "^8.53.0",
-    "prettier": "^3.0.3",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0",
-    "unocss": "^0.57.2",
-    "vite": "^4.5.0",
+    "unocss": "^0.57.5",
+    "vite": "^5.0.0",
     "vue": "^3.3.8",
     "vue-tsc": "^1.8.22"
   }
