@@ -12,7 +12,13 @@ const { modals } = useModals(props.scope);
 </script>
 
 <template>
-  <div class="relative z-[100]">
+  <div
+    class="relative z-[100]"
+    :style="{
+      '--duration-background': '200ms',
+      '--duration-content': '100ms',
+    }"
+  >
     <Transition name="background-fade">
       <slot v-if="modals.length">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm" />
@@ -32,11 +38,11 @@ const { modals } = useModals(props.scope);
 
 <style scoped>
 .background-fade-enter-active {
-  transition: opacity 300ms ease-out;
+  transition: opacity var(--duration-background) ease-out;
 }
 
 .background-fade-leave-active {
-  transition: opacity 200ms ease-in;
+  transition: opacity var(--duration-content) ease-in;
 }
 
 .background-fade-enter-from,
@@ -51,14 +57,14 @@ const { modals } = useModals(props.scope);
 
 .content-fade-enter-active {
   transition:
-    opacity 300ms ease-out,
-    transform 300ms ease-out;
+    opacity var(--duration-background) ease-out,
+    transform var(--duration-background) ease-out;
 }
 
 .content-fade-leave-active {
   transition:
-    opacity 200ms ease-in,
-    transform 200ms ease-in;
+    opacity var(--duration-content) ease-in,
+    transform var(--duration-content) ease-in;
 }
 
 .content-fade-enter-from {
