@@ -1,3 +1,4 @@
+import AutoGrowTextarea from "./AutoGrowTextarea.vue";
 import DetailsContent from "./DetailsContent.vue";
 import DetailsGroup from "./DetailsGroup.vue";
 import DetailsItem from "./DetailsItem.vue";
@@ -24,6 +25,7 @@ import TextRevealToken from "./TextRevealToken.vue";
 import TextShimmer from "./TextShimmer.vue";
 
 export {
+  AutoGrowTextarea,
   DetailsContent,
   DetailsGroup,
   DetailsItem,
