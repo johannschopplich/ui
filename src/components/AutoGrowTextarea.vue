@@ -22,17 +22,19 @@ const data = useVModel(props, "modelValue", emit);
 </script>
 
 <template>
-  <textarea
-    ref="textarea"
-    v-model="data"
-    class="grid-area-[1/1/2/2] resize-none overflow-hidden"
-    :class="sharedClassNames"
-    v-bind="$attrs"
-  />
-  <!-- The weird space is needed to prevent jumpy behavior -->
-  <div
-    class="invisible grid-area-[1/1/2/2] whitespace-pre-wrap"
-    :class="sharedClassNames"
-    v-text="`${data} `"
-  />
+  <div class="grid">
+    <textarea
+      ref="textarea"
+      v-model="data"
+      class="grid-area-[1/1/2/2] resize-none overflow-hidden"
+      :class="sharedClassNames"
+      v-bind="$attrs"
+    />
+    <!-- The weird space is needed to prevent jumpy behavior -->
+    <div
+      class="invisible grid-area-[1/1/2/2] whitespace-pre-wrap"
+      :class="sharedClassNames"
+      v-text="`${data} `"
+    />
+  </div>
 </template>
