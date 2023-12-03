@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useVModel } from "@vueuse/core";
 
 defineOptions({ inheritAttrs: false });
@@ -15,10 +15,18 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: "update:modelValue", value: string): void;
+  (event: "mounted:textarea", value?: HTMLTextAreaElement): void;
 }>();
 
-const textarea = ref<HTMLTextAreaElement | undefined>();
 const data = useVModel(props, "modelValue", emit);
+const textarea = ref<HTMLTextAreaElement | undefined>();
+
+onMounted(() => {
+  if (textarea.value) {
+    // eslint-disable-next-line vue/custom-event-name-casing
+    emit("mounted:textarea", textarea.value);
+  }
+});
 </script>
 
 <template>
