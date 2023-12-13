@@ -1,3 +1,4 @@
+/* eslint-disable symbol-description */
 import type { ComputedRef, InjectionKey, Ref } from "vue";
 
 interface DetailsGroupContext {

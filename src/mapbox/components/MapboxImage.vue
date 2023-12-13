@@ -56,7 +56,7 @@ function loadImage(src: string) {
       map.value?.loadImage(src, (error, data) => {
         if (error) {
           console.error(error);
-          reject();
+          reject(error);
           return;
         }
 

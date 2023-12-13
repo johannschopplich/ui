@@ -91,7 +91,7 @@ async function openModal() {
               class="[mask-image:radial-gradient(white,transparent_85%)] absolute inset-0 h-full w-full fill-gray-400"
             />
             <div
-              class="absolute inset-0 flex items-center justify-center text-size-[10rem] font-medium leading-tight text-rose-300"
+              class="absolute inset-0 flex items-center justify-center text-size-[10rem] text-rose-300 font-medium leading-tight"
             >
               {{ index + 1 }}
             </div>
@@ -300,7 +300,7 @@ async function openModal() {
           <div
             class="relative h-full w-[28rem] border border-gray-200 rounded-2xl bg-gray-100 px-8 py-6"
           >
-            <div class="pb-4 font-light text-gray-800">
+            <div class="pb-4 text-gray-800 font-light">
               {{ text }}
             </div>
           </div>
@@ -332,7 +332,7 @@ async function openModal() {
           class="overflow-hidden px-4 transition-all duration-500 will-change-height"
         >
           <p
-            class="pb-4 font-light leading-relaxed tracking-wide text-gray-800"
+            class="pb-4 text-gray-800 font-light leading-relaxed tracking-wide"
           >
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
             facere deserunt earum eos perspiciatis rem, ipsam omnis tenetur

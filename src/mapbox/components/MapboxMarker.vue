@@ -46,7 +46,7 @@ const marker = ref<Marker | undefined>();
 const content = ref<HTMLElement | undefined>();
 
 const options = computed(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { lngLat, ...rest } = props;
 
   // Use current component's element if container is not set

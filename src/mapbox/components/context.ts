@@ -1,3 +1,4 @@
+/* eslint-disable symbol-description */
 import type { InjectionKey, ShallowRef } from "vue";
 import type { Map } from "mapbox-gl";
 

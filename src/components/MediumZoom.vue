@@ -19,7 +19,7 @@ const props = withDefaults(
   },
 );
 
-let zoom: Zoom | undefined = undefined;
+let zoom: Zoom | undefined;
 
 watch(
   () => props.options,
