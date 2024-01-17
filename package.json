@@ -72,7 +72,7 @@
     "vue": "^3"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.9.2"
+    "@nuxt/kit": "^3.9.3"
   },
   "optionalDependencies": {
     "@types/mapbox-gl": "^2.7.19",
