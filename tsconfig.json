@@ -5,7 +5,7 @@
     "module": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      "@byjohann/ui": ["./src/index.ts"],
+      "@byjohann/ui": ["./src/index.ts"]
     },
     "skipLibCheck": true,
 
@@ -19,8 +19,8 @@
     "jsx": "preserve",
 
     /* Linting */
-    "strict": true,
+    "strict": true
   },
   "include": ["playground", "src"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
