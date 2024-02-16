@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { useVModel } from "@vueuse/core";
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<{
-  modelValue: string;
+defineProps<{
   /**
    * Identical styling is required for both elements to allow for auto-grow
    * @example "sm:text-sm sm:leading-6"
@@ -14,11 +12,10 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "update:modelValue", value: string): void;
-  (event: "mounted:textarea", value?: HTMLTextAreaElement): void;
+  (event: "mounted:textarea", value: HTMLTextAreaElement): void;
 }>();
 
-const data = useVModel(props, "modelValue", emit);
+const model = defineModel<string>({ required: true });
 const textarea = ref<HTMLTextAreaElement | undefined>();
 
 onMounted(() => {
@@ -33,7 +30,7 @@ onMounted(() => {
   <div class="grid">
     <textarea
       ref="textarea"
-      v-model="data"
+      v-model="model"
       class="grid-area-[1/1/2/2] resize-none overflow-hidden"
       :class="sharedClassNames"
       v-bind="$attrs"
@@ -42,7 +39,7 @@ onMounted(() => {
     <div
       class="invisible grid-area-[1/1/2/2] whitespace-pre-wrap"
       :class="sharedClassNames"
-      v-text="`${data} `"
+      v-text="`${model} `"
     />
   </div>
 </template>
