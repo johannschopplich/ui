@@ -3,8 +3,7 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "skipLibCheck": true
   },
   "include": ["build.config.ts"]
 }
