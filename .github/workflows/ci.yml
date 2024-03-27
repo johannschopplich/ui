@@ -19,11 +19,8 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - name: Install
-        run: pnpm install
-
-      - name: Lint
-        run: pnpm run lint
+      - run: pnpm install
+      - run: pnpm run lint
 
   typecheck:
     runs-on: ubuntu-latest
