@@ -4,7 +4,7 @@
     "jsx": "preserve",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "useDefineForClassFields": true,
-    "module": "Preserve",
+    "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
       "@byjohann/ui": ["./src/index.ts"]
