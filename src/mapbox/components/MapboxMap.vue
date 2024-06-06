@@ -184,7 +184,6 @@ provide(mapCtxKey, map);
 const root = ref<HTMLElement | undefined>();
 const isLoaded = ref(false);
 const options = computed(() => {
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const { accessToken, mapStyle: style, ...rest } = props;
   return { style, container: root.value, ...rest } as MapboxOptions;
 });

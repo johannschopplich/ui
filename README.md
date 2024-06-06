@@ -1,8 +1,6 @@
 # @byjohann/ui
 
-[![NPM version](https://img.shields.io/npm/v/@byjohann/ui?color=a1b858&label=)](https://www.npmjs.com/package/@byjohann/ui)
-
-> A collection of Vue.js components for my projects.
+A collection of Vue.js components for my projects.
 
 ## Setup
 
