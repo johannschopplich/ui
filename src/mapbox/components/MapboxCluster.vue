@@ -148,7 +148,7 @@ function clustersClickHandler(event: MapLayerMouseEvent) {
   const feature = map.value!.queryRenderedFeatures(event.point, {
     layers: [clustersLayer.value.id],
   })[0];
-  const clusterId = feature.properties?.cluster_id as number;
+  const clusterId = feature?.properties?.cluster_id as number;
 
   // Emit a cluster click event
   // eslint-disable-next-line vue/require-explicit-emits
@@ -160,7 +160,7 @@ function clustersClickHandler(event: MapLayerMouseEvent) {
     if (error) return;
 
     map.value!.easeTo({
-      center: (feature.geometry as GeoJSON.Point).coordinates as [
+      center: (feature?.geometry as GeoJSON.Point).coordinates as [
         number,
         number,
       ],

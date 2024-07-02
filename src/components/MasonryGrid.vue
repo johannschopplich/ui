@@ -64,7 +64,7 @@ function updateGridItems() {
     for (const [index, column] of properties.items.slice(columns).entries()) {
       // Bottom edge of item above
       const { bottom: prevBottom } =
-        properties.items[index].getBoundingClientRect();
+        properties.items[index]!.getBoundingClientRect();
       // Top edge of current item
       const { top } = column.getBoundingClientRect();
 
