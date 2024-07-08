@@ -77,7 +77,7 @@ const props = withDefaults(
     localIdeographFontFamily: "sans-serif",
     performanceMetricsCollection: false,
     tessellationStep: 3,
-  }
+  },
 );
 
 const emit = defineEmits<{

@@ -17,7 +17,7 @@ watch(
       const source = map.value?.getSource(props.id) as GeoJSONSource;
       source?.setData(newValue);
     }
-  }
+  },
 );
 
 onMounted(() => {

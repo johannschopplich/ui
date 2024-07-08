@@ -18,27 +18,27 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
     },
     "./components": {
-      "types": "./dist/components/index.d.mts",
+      "types": "./dist/components/index.d.ts",
       "import": "./dist/components/index.mjs"
     },
     "./composables": {
-      "types": "./dist/composables/index.d.mts",
+      "types": "./dist/composables/index.d.ts",
       "import": "./dist/composables/index.mjs"
     },
     "./mapbox": {
-      "types": "./dist/mapbox/index.d.mts",
+      "types": "./dist/mapbox/index.d.ts",
       "import": "./dist/mapbox/index.mjs"
     },
     "./nuxt": {
-      "types": "./dist/nuxt/index.d.mts",
+      "types": "./dist/nuxt/index.d.ts",
       "import": "./dist/nuxt/index.mjs"
     },
     "./utils": {
-      "types": "./dist/utils/index.d.mts",
+      "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.mjs"
     }
   },
@@ -62,7 +62,8 @@
     "vue": "^3"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.12.3"
+    "@nuxt/kit": "^3.12.3",
+    "@nuxt/schema": "^3.12.3"
   },
   "optionalDependencies": {
     "@types/geojson": "^7946.0.14",

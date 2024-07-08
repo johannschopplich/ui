@@ -4,7 +4,7 @@ export default defineBuildConfig({
   entries: [
     {
       builder: "mkdist",
-      input: "./src/",
+      input: "src",
     },
   ],
   declaration: true,

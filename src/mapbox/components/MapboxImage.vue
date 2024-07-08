@@ -27,7 +27,7 @@ watch(
     if (!image) return;
     map.value?.updateImage(props.id, image);
   },
-  { deep: true }
+  { deep: true },
 );
 
 onMounted(async () => {

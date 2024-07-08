@@ -84,7 +84,7 @@ const props = withDefaults(
       "circle-color": "#000",
       "circle-radius": 4,
     }),
-  }
+  },
 );
 
 const emit = defineEmits<{
@@ -125,7 +125,7 @@ const clustersLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clustersLayout,
       paint: props.clustersPaint,
-    }) as LayerSpecification
+    }) as LayerSpecification,
 );
 
 const clusterCountLayer = computed(
@@ -137,7 +137,7 @@ const clusterCountLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clusterCountLayout,
       paint: props.clusterCountPaint,
-    }) as LayerSpecification
+    }) as LayerSpecification,
 );
 
 const unclusteredPointLayer = computed(
@@ -149,7 +149,7 @@ const unclusteredPointLayer = computed(
       filter: ["!", ["has", "point_count"]],
       layout: props.unclusteredPointLayout,
       paint: props.unclusteredPointPaint,
-    }) as LayerSpecification
+    }) as LayerSpecification,
 );
 
 /**

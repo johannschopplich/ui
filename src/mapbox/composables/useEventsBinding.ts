@@ -17,15 +17,15 @@ export function useEventsBinding<T extends Evented>(
   /** The events to map */
   events: string[] = [],
   /** The layer on which the events are delegated */
-  layerId?: string
+  layerId?: string,
 ) {
   const attrs = useAttrs();
   const vueEventNames = computed(() =>
     Object.entries(attrs)
       .filter(
-        ([name, value]) => name.startsWith("on") && typeof value === "function"
+        ([name, value]) => name.startsWith("on") && typeof value === "function",
       )
-      .map(([name]) => name)
+      .map(([name]) => name),
   );
 
   const unbindFunctions = new Map<string, () => void>();
@@ -76,12 +76,12 @@ export function useEventsBinding<T extends Evented>(
     (newVueEventNames = [], oldVueEventNames = []) => {
       // Get old event names not in the new event names
       const eventNamesToDelete = oldVueEventNames.filter(
-        (name) => !newVueEventNames.includes(name)
+        (name) => !newVueEventNames.includes(name),
       );
 
       // Get new event names not in the old event names
       const eventNamesToAdd = (newVueEventNames ?? []).filter(
-        (name) => !oldVueEventNames.includes(name)
+        (name) => !oldVueEventNames.includes(name),
       );
 
       if (element.value) {
@@ -99,7 +99,7 @@ export function useEventsBinding<T extends Evented>(
         });
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 }
 
@@ -112,8 +112,8 @@ function getOriginalEvent(vueEventName: string) {
       vueEventName,
       vueEventName.replace(
         EVENT_PREFIX,
-        (_match, $1, $2) => $1.toLowerCase() + $2
-      ) as MapEvent
+        (_match, $1, $2) => $1.toLowerCase() + $2,
+      ) as MapEvent,
     );
   }
 
