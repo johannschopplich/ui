@@ -23,16 +23,16 @@ watch(
   () => props.src,
   async (newValue) => {
     const image =
-      typeof newValue !== "string" ? newValue : await loadImage(newValue);
+      typeof newValue === "string" ? await loadImage(newValue) : newValue;
     if (!image) return;
     map.value?.updateImage(props.id, image);
   },
-  { deep: true },
+  { deep: true }
 );
 
 onMounted(async () => {
   const { id, src, options } = props;
-  const image = typeof src !== "string" ? src : await loadImage(src);
+  const image = typeof src === "string" ? await loadImage(src) : src;
   if (!image) return;
 
   map.value?.addImage(id, image, options);
@@ -51,19 +51,19 @@ onUnmounted(() => {
  * Load the given image with the Mapbox `loadImage` method
  */
 function loadImage(src: string) {
-  return new Promise<HTMLImageElement | ImageBitmap | undefined>(
-    (resolve, reject) => {
-      map.value?.loadImage(src, (error, data) => {
-        if (error) {
-          console.error(error);
-          reject(error);
-          return;
-        }
+  return new Promise<
+    HTMLImageElement | ImageData | ImageBitmap | null | undefined
+  >((resolve, reject) => {
+    map.value?.loadImage(src, (error, data) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
 
-        resolve(data);
-      });
-    },
-  );
+      resolve(data);
+    });
+  });
 }
 </script>
 

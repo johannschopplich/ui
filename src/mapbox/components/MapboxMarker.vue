@@ -1,35 +1,40 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useSlots } from "vue";
 import mapboxgl from "mapbox-gl";
-import type { LngLatLike, Marker, MarkerOptions, PointLike } from "mapbox-gl";
+import type { Anchor, LngLatLike, Marker, PointLike } from "mapbox-gl";
 import { useEventsBinding, useMap, usePropsBinding } from "../composables";
 
+interface MarkerOptions {
+  element?: HTMLElement;
+  offset?: PointLike;
+  anchor?: Anchor;
+  color?: string;
+  scale?: number;
+  draggable?: boolean;
+  clickTolerance?: number;
+  rotation?: number;
+  rotationAlignment?: string;
+  pitchAlignment?: string;
+  occludedOpacity?: number;
+  className?: string;
+}
+
 const props = withDefaults(
-  defineProps<{
-    anchor?: string;
-    clickTolerance?: number;
-    color?: string;
-    draggable?: boolean;
-    element?: HTMLElement;
-    lngLat: LngLatLike;
-    offset?: PointLike;
-    pitchAlignment?: string;
-    rotation?: number;
-    rotationAlignment?: string;
-    scale?: number;
-  }>(),
+  defineProps<MarkerOptions & { lngLat: LngLatLike }>(),
   {
-    anchor: "center",
-    clickTolerance: 0,
-    color: undefined,
-    draggable: false,
     element: undefined,
+    anchor: "center",
     offset: undefined,
-    pitchAlignment: "auto",
-    rotation: 0,
-    rotationAlignment: "auto",
+    color: undefined,
     scale: 1,
-  },
+    draggable: false,
+    clickTolerance: 0,
+    rotation: 0,
+    pitchAlignment: "auto",
+    rotationAlignment: "auto",
+    occludedOpacity: 0.2,
+    className: undefined,
+  }
 );
 
 const emit = defineEmits<{
@@ -45,7 +50,7 @@ const map = useMap();
 const marker = ref<Marker | undefined>();
 const content = ref<HTMLElement | undefined>();
 
-const options = computed(() => {
+const options = computed<MarkerOptions>(() => {
   const { lngLat, ...rest } = props;
 
   // Use current component's element if container is not set
@@ -53,7 +58,7 @@ const options = computed(() => {
     rest.element = content.value!;
   }
 
-  return rest as MarkerOptions;
+  return rest;
 });
 
 usePropsBinding(props, marker);
@@ -61,7 +66,7 @@ useEventsBinding(emit, marker, events);
 
 onMounted(() => {
   marker.value = new mapboxgl.Marker(options.value)
-    .setLngLat(props.lngLat as LngLatLike)
+    .setLngLat(props.lngLat)
     .addTo(map.value!);
 });
 

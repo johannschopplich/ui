@@ -8,118 +8,76 @@ import {
   shallowRef,
 } from "vue";
 import mapboxgl from "mapbox-gl";
-import type {
-  FitBoundsOptions,
-  LngLatBoundsLike,
-  LngLatLike,
-  Map,
-  MapboxOptions,
-  Style,
-  TransformRequestFunction,
-} from "mapbox-gl";
+import type { Map, MapOptions, StyleSpecification } from "mapbox-gl";
 import { useEventsBinding, usePropsBinding } from "../composables";
 import { mapCtxKey } from "./context";
 
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<{
-    accessToken?: string;
-    antialias?: boolean;
-    attributionControl?: boolean;
-    bearing?: number;
-    bearingSnap?: number;
-    bounds?: LngLatBoundsLike;
-    boxZoom?: boolean;
-    center?: LngLatLike;
-    clickTolerance?: number;
-    collectResourceTiming?: boolean;
-    cooperativeGestures?: boolean;
-    crossSourceCollisions?: boolean;
-    customAttribution?: string | string[];
-    doubleClickZoom?: boolean;
-    dragPan?: boolean | Record<string, any>;
-    dragRotate?: boolean;
-    fadeDuration?: number;
-    failIfMajorPerformanceCaveat?: boolean;
-    fitBoundsOptions?: FitBoundsOptions;
-    hash?: boolean;
-    interactive?: boolean;
-    keyboard?: boolean;
-    language?: string[] | (string & Record<never, never>) | "auto";
-    locale?: Record<string, any>;
-    localFontFamily?: string | boolean;
-    localIdeographFontFamily?: string;
-    logoPosition?: string;
-    maxBounds?: LngLatBoundsLike;
-    maxPitch?: number;
-    maxTileCacheSize?: number;
-    maxZoom?: number;
-    minPitch?: number;
-    minZoom?: number;
-    pitch?: number;
-    pitchWithRotate?: boolean;
-    preserveDrawingBuffer?: boolean;
-    refreshExpiredTiles?: boolean;
-    renderWorldCopies?: boolean;
-    scrollZoom?: boolean | { around?: "center" };
-    mapStyle?: string | Style;
-    touchPitch?: boolean | { around?: "center" };
-    touchZoomRotate?: boolean | { around?: "center" };
-    trackResize?: boolean;
-    transformRequest?: TransformRequestFunction;
-    useWebGL2?: boolean;
-    zoom?: number;
-  }>(),
+  defineProps<
+    Omit<MapOptions, "style" | "container"> & {
+      mapStyle: string | StyleSpecification;
+    }
+  >(),
   {
-    accessToken: undefined,
-    antialias: false,
-    attributionControl: true,
-    bearing: 0,
-    bearingSnap: 7,
-    bounds: undefined,
-    boxZoom: true,
-    // @ts-expect-error: Type mismatch
-    center: [0, 0],
-    clickTolerance: 3,
-    collectResourceTiming: false,
-    cooperativeGestures: false,
-    crossSourceCollisions: true,
-    customAttribution: undefined,
-    doubleClickZoom: true,
-    dragPan: true,
-    dragRotate: true,
-    fadeDuration: 300,
-    failIfMajorPerformanceCaveat: false,
-    fitBoundsOptions: undefined,
+    mapStyle: undefined,
+    config: undefined,
     hash: false,
     interactive: true,
-    keyboard: true,
-    language: undefined,
-    locale: undefined,
-    localFontFamily: false,
-    localIdeographFontFamily: "sans-serif",
+    bearingSnap: 7,
+    clickTolerance: 3,
+    pitchWithRotate: true,
+    attributionControl: true,
+    customAttribution: undefined,
     logoPosition: "bottom-left",
+    failIfMajorPerformanceCaveat: false,
+    preserveDrawingBuffer: false,
+    antialias: false,
+    refreshExpiredTiles: true,
+    bounds: undefined,
     maxBounds: undefined,
-    maxPitch: 85,
-    maxTileCacheSize: undefined,
+    fitBoundsOptions: undefined,
+    scrollZoom: true,
+    minZoom: 0,
     maxZoom: 22,
     minPitch: 0,
-    minZoom: 0,
-    pitch: 0,
-    pitchWithRotate: true,
-    preserveDrawingBuffer: false,
-    refreshExpiredTiles: true,
-    renderWorldCopies: true,
-    scrollZoom: true,
-    mapStyle: undefined,
-    touchPitch: true,
+    maxPitch: 85,
+    boxZoom: true,
+    dragRotate: true,
+    dragPan: true,
+    keyboard: true,
+    doubleClickZoom: true,
     touchZoomRotate: true,
+    touchPitch: true,
+    cooperativeGestures: undefined,
     trackResize: true,
-    transformRequest: undefined,
-    useWebGL2: false,
+    center: () => [0, 0],
     zoom: 0,
-  },
+    bearing: 0,
+    pitch: 0,
+    projection: undefined,
+    renderWorldCopies: true,
+    minTileCacheSize: undefined,
+    maxTileCacheSize: undefined,
+    transformRequest: undefined,
+    accessToken: undefined,
+    testMode: false,
+    locale: undefined,
+    language: undefined,
+    worldview: undefined,
+    crossSourceCollisions: true,
+    collectResourceTiming: false,
+    respectPrefersReducedMotion: true,
+    contextCreateOptions: undefined,
+    devtools: undefined,
+    repaint: undefined,
+    fadeDuration: 300,
+    localFontFamily: undefined,
+    localIdeographFontFamily: "sans-serif",
+    performanceMetricsCollection: false,
+    tessellationStep: 3,
+  }
 );
 
 const emit = defineEmits<{
@@ -183,16 +141,16 @@ provide(mapCtxKey, map);
 
 const root = ref<HTMLElement | undefined>();
 const isLoaded = ref(false);
-const options = computed(() => {
+const options = computed<MapOptions>(() => {
   const { accessToken, mapStyle: style, ...rest } = props;
-  return { style, container: root.value, ...rest } as MapboxOptions;
+  return { ...rest, style, container: root.value! };
 });
 
 useEventsBinding(emit, map, events);
 usePropsBinding(props, map);
 
 onMounted(() => {
-  mapboxgl.accessToken = props.accessToken;
+  if (props.accessToken) mapboxgl.accessToken = props.accessToken;
 
   map.value = new mapboxgl.Map(options.value);
   map.value.on("load", () => {

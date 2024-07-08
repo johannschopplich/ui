@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted } from "vue";
-import type { AnyLayer, Layer } from "mapbox-gl";
+import type { LayerSpecification } from "mapbox-gl";
 import { useEventsBinding, useMap } from "../composables";
 
 const props = defineProps<{
   id: string;
-  options: Layer;
+  options: LayerSpecification;
   beforeId?: string;
 }>();
 
@@ -34,8 +34,8 @@ const events = [
 ];
 
 const map = useMap();
-const options = computed(() => {
-  const _options: Layer = { ...props.options, id: props.id };
+const options = computed<LayerSpecification>(() => {
+  const _options = { ...props.options, id: props.id };
 
   if (_options.paint == null) delete _options.paint;
   if (_options.layout == null) delete _options.layout;
@@ -48,7 +48,7 @@ useEventsBinding(emit, map, events, props.id);
 onMounted(() => {
   removeLayer();
   removeSource();
-  map.value?.addLayer(options.value as AnyLayer, props.beforeId);
+  map.value?.addLayer(options.value, props.beforeId);
 });
 
 onUnmounted(() => {

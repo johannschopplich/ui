@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, watch } from "vue";
-import type { GeoJSONSource, GeoJSONSourceRaw, Layer } from "mapbox-gl";
+import type { GeoJSONSource, GeoJSONSourceSpecification } from "mapbox-gl";
 import { useMap } from "../composables";
 
 const props = defineProps<{
   id: string;
-  options: GeoJSONSourceRaw;
+  options: GeoJSONSourceSpecification;
 }>();
 
 const map = useMap();
@@ -15,10 +15,9 @@ watch(
   (newValue) => {
     if (newValue) {
       const source = map.value?.getSource(props.id) as GeoJSONSource;
-      // @ts-expect-error: Mapbox GL types are incorrect
       source?.setData(newValue);
     }
-  },
+  }
 );
 
 onMounted(() => {
@@ -27,7 +26,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   // Remove all layers tied to the source
-  const layers: Layer[] = map.value?.getStyle().layers ?? [];
+  const layers = map.value?.getStyle()?.layers ?? [];
 
   for (const layer of Object.values(layers)) {
     if (layer.source === props.id) {

@@ -2,10 +2,12 @@
 import { computed, ref } from "vue";
 import type {
   GeoJSONSource,
-  GeoJSONSourceRaw,
+  GeoJSONSourceSpecification,
   Layer,
-  MapLayerMouseEvent,
-  SymbolLayout,
+  LayerSpecification,
+  LngLatLike,
+  MapMouseEvent,
+  SymbolLayerSpecification,
 } from "mapbox-gl";
 import { useMap } from "../composables";
 import MapboxLayer from "./MapboxLayer.vue";
@@ -15,7 +17,7 @@ import { getClusterIndex } from "./context";
 const props = withDefaults(
   defineProps<{
     /** The source of the data for the clustered points */
-    data: NonNullable<GeoJSONSourceRaw["data"]>;
+    data: GeoJSON.GeoJSON | string;
     /** The max zoom to cluster points on */
     clusterMaxZoom?: number;
     /** Minimum number of points necessary to form a cluster. */
@@ -38,12 +40,12 @@ const props = withDefaults(
      * The layout configuration for the clusters count
      * @see https://docs.mapbox.com/mapbox-gl-js/example/cluster/
      */
-    clusterCountLayout?: SymbolLayout;
+    clusterCountLayout?: SymbolLayerSpecification["layout"];
     /**
      * The paint configuration for the clusters count
      * @see https://docs.mapbox.com/mapbox-gl-js/example/cluster/
      */
-    clusterCountPaint?: Layer["paint"];
+    clusterCountPaint?: LayerSpecification["paint"];
     /**
      * The type of the unclustered points layer
      * @see https://docs.mapbox.com/mapbox-gl-js/example/cluster/
@@ -53,12 +55,12 @@ const props = withDefaults(
      * The layout configuration for the unclustered points
      * @see https://docs.mapbox.com/mapbox-gl-js/example/cluster/
      */
-    unclusteredPointLayout?: Layer["layout"];
+    unclusteredPointLayout?: LayerSpecification["layout"];
     /**
      * The paint configuration for the unclustered points
      * @see https://docs.mapbox.com/mapbox-gl-js/example/cluster/
      */
-    unclusteredPointPaint?: Layer["paint"];
+    unclusteredPointPaint?: LayerSpecification["paint"];
   }>(),
   {
     clusterMaxZoom: 14,
@@ -82,7 +84,7 @@ const props = withDefaults(
       "circle-color": "#000",
       "circle-radius": 4,
     }),
-  },
+  }
 );
 
 const emit = defineEmits<{
@@ -95,7 +97,7 @@ const id = ref(`mb-cluster-${index}`);
 const getId = (suffix: string) => `${id.value}-${suffix}`;
 
 const sourceId = computed(() => getId("source"));
-const source = computed<GeoJSONSourceRaw>(() => {
+const source = computed<GeoJSONSourceSpecification>(() => {
   const {
     data,
     clusterMaxZoom,
@@ -114,37 +116,46 @@ const source = computed<GeoJSONSourceRaw>(() => {
   };
 });
 
-const clustersLayer = computed<Layer>(() => ({
-  id: getId("clusters"),
-  type: "circle",
-  source: sourceId.value,
-  filter: ["has", "point_count"],
-  layout: props.clustersLayout,
-  paint: props.clustersPaint,
-}));
+const clustersLayer = computed(
+  () =>
+    ({
+      id: getId("clusters"),
+      type: "circle",
+      source: sourceId.value,
+      filter: ["has", "point_count"],
+      layout: props.clustersLayout,
+      paint: props.clustersPaint,
+    }) as LayerSpecification
+);
 
-const clusterCountLayer = computed<Layer>(() => ({
-  id: getId("cluster-count"),
-  type: "symbol",
-  source: sourceId.value,
-  filter: ["has", "point_count"],
-  layout: props.clusterCountLayout,
-  paint: props.clusterCountPaint,
-}));
+const clusterCountLayer = computed(
+  () =>
+    ({
+      id: getId("cluster-count"),
+      type: "symbol",
+      source: sourceId.value,
+      filter: ["has", "point_count"],
+      layout: props.clusterCountLayout,
+      paint: props.clusterCountPaint,
+    }) as LayerSpecification
+);
 
-const unclusteredPointLayer = computed<Layer>(() => ({
-  id: getId("unclustered-point"),
-  type: props.unclusteredPointLayerType!,
-  source: sourceId.value,
-  filter: ["!", ["has", "point_count"]],
-  layout: props.unclusteredPointLayout,
-  paint: props.unclusteredPointPaint,
-}));
+const unclusteredPointLayer = computed(
+  () =>
+    ({
+      id: getId("unclustered-point"),
+      type: props.unclusteredPointLayerType!,
+      source: sourceId.value,
+      filter: ["!", ["has", "point_count"]],
+      layout: props.unclusteredPointLayout,
+      paint: props.unclusteredPointPaint,
+    }) as LayerSpecification
+);
 
 /**
  * Click handler for the clusters layer to zoom on the clicked cluster
  */
-function clustersClickHandler(event: MapLayerMouseEvent) {
+function clustersClickHandler(event: MapMouseEvent) {
   const feature = map.value!.queryRenderedFeatures(event.point, {
     layers: [clustersLayer.value.id],
   })[0];
@@ -160,11 +171,8 @@ function clustersClickHandler(event: MapLayerMouseEvent) {
     if (error) return;
 
     map.value!.easeTo({
-      center: (feature?.geometry as GeoJSON.Point).coordinates as [
-        number,
-        number,
-      ],
-      zoom,
+      center: (feature?.geometry as GeoJSON.Point).coordinates as LngLatLike,
+      zoom: zoom!,
     });
   });
 }
@@ -187,7 +195,7 @@ function clustersMouseleaveHandler() {
  * Handler for the click event on a single feature, emits an event with
  * the feature object and the original event object
  */
-function unclusteredPointClickHandler(event: MapLayerMouseEvent) {
+function unclusteredPointClickHandler(event: MapMouseEvent) {
   // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureClick", event.features?.[0], event);
 }
@@ -197,7 +205,7 @@ function unclusteredPointClickHandler(event: MapLayerMouseEvent) {
  * Emits an event with the feature object and the original event as
  * parameters, and sets the cursor style to pointer
  */
-function unclusteredPointMouseenterHandler(event: MapLayerMouseEvent) {
+function unclusteredPointMouseenterHandler(event: MapMouseEvent) {
   // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureMouseenter", event.features?.[0], event);
   map.value!.getCanvas().style.cursor = "pointer";
@@ -208,7 +216,7 @@ function unclusteredPointMouseenterHandler(event: MapLayerMouseEvent) {
  * Emits an event with the original event object as parameter, and resets
  * the cursor style to its default value
  */
-function unclusteredPointMouseleaveHandler(event: MapLayerMouseEvent) {
+function unclusteredPointMouseleaveHandler(event: MapMouseEvent) {
   // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureMouseleave", event);
   map.value!.getCanvas().style.cursor = "";

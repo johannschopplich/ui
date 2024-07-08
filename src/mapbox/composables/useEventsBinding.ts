@@ -1,8 +1,9 @@
 import { computed, useAttrs, watch } from "vue";
 import type { Ref } from "vue";
-import type { Evented, MapLayerEventType } from "mapbox-gl";
+import type { MapEvent, Map as MapboxMap } from "mapbox-gl";
+import type { Evented } from "../components/context";
 
-const cache = new Map<string, keyof MapLayerEventType>();
+const cache = new Map<string, MapEvent>();
 const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 
 /**
@@ -11,20 +12,20 @@ const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 export function useEventsBinding<T extends Evented>(
   /** The emit function for the current component */
   emitFn: (event: string, ...args: any[]) => void,
-  /** The Mapbox element bound to the component */
-  mapboxElement: Ref<T | undefined>,
+  /** The element bound to the component */
+  element: Ref<T | undefined>,
   /** The events to map */
   events: string[] = [],
   /** The layer on which the events are delegated */
-  layerId?: string,
+  layerId?: string
 ) {
   const attrs = useAttrs();
   const vueEventNames = computed(() =>
     Object.entries(attrs)
       .filter(
-        ([name, value]) => name.startsWith("on") && typeof value === "function",
+        ([name, value]) => name.startsWith("on") && typeof value === "function"
       )
-      .map(([name]) => name),
+      .map(([name]) => name)
   );
 
   const unbindFunctions = new Map<string, () => void>();
@@ -42,8 +43,8 @@ export function useEventsBinding<T extends Evented>(
    * Bind Vue events to the given Mapbox element
    */
   function bindEvents(eventNames: string[]) {
-    const map = mapboxElement.value;
-    if (!map) return;
+    const el = element.value;
+    if (!el) return;
 
     for (const eventName of eventNames) {
       const originalEvent = getOriginalEvent(eventName);
@@ -54,21 +55,17 @@ export function useEventsBinding<T extends Evented>(
         emitFn(`mb-${originalEvent}`, ...payload);
       };
 
-      // If `layerId` is not undefined, all events must be
-      // delegated from the map to the given `layerId`
       if (layerId) {
-        // @ts-expect-error: `on` type definition is missing the `layerId` parameter
-        map.on(originalEvent, layerId, handler);
+        (el as unknown as MapboxMap).on(originalEvent, layerId, handler);
 
         unbindFunctions.set(eventName, () => {
-          // @ts-expect-error: `on` type definition is missing the `layerId` parameter
-          map.off(originalEvent, layerId, handler);
+          (el as unknown as MapboxMap).off(originalEvent, layerId, handler);
         });
       } else {
-        map.on(originalEvent, handler);
+        el.on(originalEvent, handler);
 
         unbindFunctions.set(eventName, () => {
-          map.off(originalEvent, handler);
+          el.off(originalEvent, handler);
         });
       }
     }
@@ -79,21 +76,21 @@ export function useEventsBinding<T extends Evented>(
     (newVueEventNames = [], oldVueEventNames = []) => {
       // Get old event names not in the new event names
       const eventNamesToDelete = oldVueEventNames.filter(
-        (name) => !newVueEventNames.includes(name),
+        (name) => !newVueEventNames.includes(name)
       );
 
       // Get new event names not in the old event names
       const eventNamesToAdd = (newVueEventNames ?? []).filter(
-        (name) => !oldVueEventNames.includes(name),
+        (name) => !oldVueEventNames.includes(name)
       );
 
-      if (mapboxElement.value) {
+      if (element.value) {
         unbindEvents(eventNamesToDelete);
         bindEvents(eventNamesToAdd);
       } else {
         // We need to watch the mapbox element once as it can
         // be null when reaching this part of the code
-        const unwatch = watch(mapboxElement, (newValue) => {
+        const unwatch = watch(element, (newValue) => {
           if (newValue) {
             unbindEvents(eventNamesToDelete);
             bindEvents(eventNamesToAdd);
@@ -102,7 +99,7 @@ export function useEventsBinding<T extends Evented>(
         });
       }
     },
-    { immediate: true },
+    { immediate: true }
   );
 }
 
@@ -115,8 +112,8 @@ function getOriginalEvent(vueEventName: string) {
       vueEventName,
       vueEventName.replace(
         EVENT_PREFIX,
-        (_match, $1, $2) => $1.toLowerCase() + $2,
-      ) as keyof MapLayerEventType,
+        (_match, $1, $2) => $1.toLowerCase() + $2
+      ) as MapEvent
     );
   }
 

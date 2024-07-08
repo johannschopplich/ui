@@ -1,18 +1,16 @@
 import { watch } from "vue";
 import type { Ref } from "vue";
-import type { Evented } from "mapbox-gl";
+import type { Evented } from "../components/context";
 
 /**
  * Map a Mapbox element's events to the given Vue element
  */
 export function usePropsBinding<T extends Evented>(
-  /** The component props */
   props: Record<string, unknown>,
-  /** The Mapbox element bound to the component */
-  mapboxElement: Ref<T | undefined>,
+  element: Ref<T | undefined>
 ) {
   /**
-   * Bind props to the given mapboxElement in order to update them when they change
+   * Bind props to the given element in order to update them when they change
    */
   function bindProps(element: T) {
     Object.keys(props)
@@ -23,7 +21,7 @@ export function usePropsBinding<T extends Evented>(
 
         const method = element[setMethodName as keyof T];
 
-        // Do nothing if `setMethodName` is not a function of `mapBoxElement`
+        // Do nothing if `setMethodName` is not a function
         if (typeof method !== "function") return;
 
         watch(
@@ -34,15 +32,15 @@ export function usePropsBinding<T extends Evented>(
           },
           {
             deep: Array.isArray(props[prop]) || isObject(props[prop]),
-          },
+          }
         );
       });
   }
 
-  if (mapboxElement.value) {
-    bindProps(mapboxElement.value);
+  if (element.value) {
+    bindProps(element.value);
   } else {
-    const unwatch = watch(mapboxElement, (newValue) => {
+    const unwatch = watch(element, (newValue) => {
       if (newValue) {
         bindProps(newValue);
         unwatch();
@@ -55,6 +53,6 @@ function upperFirst(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
+function isObject(val: unknown): val is Record<any, any> {
+  return Object.prototype.toString.call(val) === "[object Object]";
 }
