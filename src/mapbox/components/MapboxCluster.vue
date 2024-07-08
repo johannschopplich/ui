@@ -9,6 +9,7 @@ import type {
   MapMouseEvent,
   SymbolLayerSpecification,
 } from "mapbox-gl";
+import type * as GeoJSON from "geojson";
 import { useMap } from "../composables";
 import MapboxLayer from "./MapboxLayer.vue";
 import MapboxSource from "./MapboxSource.vue";
@@ -84,7 +85,7 @@ const props = withDefaults(
       "circle-color": "#000",
       "circle-radius": 4,
     }),
-  },
+  }
 );
 
 const emit = defineEmits<{
@@ -97,24 +98,15 @@ const id = ref(`mb-cluster-${index}`);
 const getId = (suffix: string) => `${id.value}-${suffix}`;
 
 const sourceId = computed(() => getId("source"));
-const source = computed<GeoJSONSourceSpecification>(() => {
-  const {
-    data,
-    clusterMaxZoom,
-    clusterRadius,
-    clusterMinPoints,
-    clusterProperties,
-  } = props;
-  return {
-    type: "geojson",
-    cluster: true,
-    data,
-    clusterMaxZoom,
-    clusterRadius,
-    clusterMinPoints,
-    clusterProperties,
-  };
-});
+const source = computed<GeoJSONSourceSpecification>(() => ({
+  type: "geojson",
+  cluster: true,
+  data: props.data,
+  clusterMaxZoom: props.clusterMaxZoom,
+  clusterRadius: props.clusterRadius,
+  clusterMinPoints: props.clusterMinPoints,
+  clusterProperties: props.clusterProperties,
+}));
 
 const clustersLayer = computed(
   () =>
@@ -125,7 +117,7 @@ const clustersLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clustersLayout,
       paint: props.clustersPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 const clusterCountLayer = computed(
@@ -137,7 +129,7 @@ const clusterCountLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clusterCountLayout,
       paint: props.clusterCountPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 const unclusteredPointLayer = computed(
@@ -149,7 +141,7 @@ const unclusteredPointLayer = computed(
       filter: ["!", ["has", "point_count"]],
       layout: props.unclusteredPointLayout,
       paint: props.unclusteredPointPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 /**

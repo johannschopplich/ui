@@ -7,7 +7,7 @@ import type { Evented } from "../components/context";
  */
 export function usePropsBinding<T extends Evented>(
   props: Record<string, unknown>,
-  element: Ref<T | undefined>,
+  element: Ref<T | undefined>
 ) {
   /**
    * Bind props to the given element in order to update them when they change
@@ -27,12 +27,12 @@ export function usePropsBinding<T extends Evented>(
         watch(
           () => props[prop],
           (value) => {
-            // @ts-expect-error: Function is callable
+            // @ts-expect-error: Function type inconsistency
             element[setMethodName as keyof T](value);
           },
           {
             deep: Array.isArray(props[prop]) || isObject(props[prop]),
-          },
+          }
         );
       });
   }
