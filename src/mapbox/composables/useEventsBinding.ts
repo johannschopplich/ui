@@ -1,7 +1,6 @@
 import { computed, useAttrs, watch } from "vue";
 import type { Ref } from "vue";
-import type { MapEvent, Map as MapboxMap } from "mapbox-gl";
-import type { Evented } from "../components/context";
+import type { MapEvent, Marker, Map as _Map } from "mapbox-gl";
 
 const cache = new Map<string, MapEvent>();
 const EVENT_PREFIX = /onMb([A-Z])(.+)/;
@@ -9,33 +8,39 @@ const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 /**
  * Map a Mapbox element's events to a Vue component
  */
-export function useEventsBinding<T extends Evented>(
-  /** The emit function for the current component */
-  emitFn: (event: string, ...args: any[]) => void,
+export function useEventsBinding<T extends _Map | Marker>(
   /** The element bound to the component */
   element: Ref<T | undefined>,
-  /** The events to map */
-  events: string[] = [],
-  /** The layer on which the events are delegated */
-  layerId?: string,
+  {
+    emit,
+    events = [],
+    layerId,
+  }: {
+    /** The emit function for the current component */
+    emit: (event: string, ...args: any[]) => void;
+    /** The events to map */
+    events?: string[];
+    /** The layer on which the events are delegated */
+    layerId?: string;
+  }
 ) {
   const attrs = useAttrs();
   const vueEventNames = computed(() =>
     Object.entries(attrs)
       .filter(
-        ([name, value]) => name.startsWith("on") && typeof value === "function",
+        ([name, value]) => name.startsWith("on") && typeof value === "function"
       )
-      .map(([name]) => name),
+      .map(([name]) => name)
   );
 
-  const unbindFunctions = new Map<string, () => void>();
+  const cleanupFns = new Map<string, () => void>();
 
   /**
    * Unbind events from the given Mapbox element
    */
   function unbindEvents(eventNames: string[]) {
     for (const eventName of eventNames) {
-      unbindFunctions.get(eventName)?.();
+      cleanupFns.get(eventName)?.();
     }
   }
 
@@ -52,19 +57,19 @@ export function useEventsBinding<T extends Evented>(
       if (!originalEvent || !events.includes(originalEvent)) continue;
 
       const handler = (...payload: any[]) => {
-        emitFn(`mb-${originalEvent}`, ...payload);
+        emit(`mb-${originalEvent}`, ...payload);
       };
 
       if (layerId) {
-        (el as unknown as MapboxMap).on(originalEvent, layerId, handler);
+        (el as unknown as _Map).on(originalEvent, layerId, handler);
 
-        unbindFunctions.set(eventName, () => {
-          (el as unknown as MapboxMap).off(originalEvent, layerId, handler);
+        cleanupFns.set(eventName, () => {
+          (el as unknown as _Map).off(originalEvent, layerId, handler);
         });
       } else {
         el.on(originalEvent, handler);
 
-        unbindFunctions.set(eventName, () => {
+        cleanupFns.set(eventName, () => {
           el.off(originalEvent, handler);
         });
       }
@@ -76,12 +81,12 @@ export function useEventsBinding<T extends Evented>(
     (newVueEventNames = [], oldVueEventNames = []) => {
       // Get old event names not in the new event names
       const eventNamesToDelete = oldVueEventNames.filter(
-        (name) => !newVueEventNames.includes(name),
+        (name) => !newVueEventNames.includes(name)
       );
 
       // Get new event names not in the old event names
       const eventNamesToAdd = (newVueEventNames ?? []).filter(
-        (name) => !oldVueEventNames.includes(name),
+        (name) => !oldVueEventNames.includes(name)
       );
 
       if (element.value) {
@@ -99,7 +104,7 @@ export function useEventsBinding<T extends Evented>(
         });
       }
     },
-    { immediate: true },
+    { immediate: true }
   );
 }
 
@@ -112,8 +117,8 @@ function getOriginalEvent(vueEventName: string) {
       vueEventName,
       vueEventName.replace(
         EVENT_PREFIX,
-        (_match, $1, $2) => $1.toLowerCase() + $2,
-      ) as MapEvent,
+        (_match, $1, $2) => $1.toLowerCase() + $2
+      ) as MapEvent
     );
   }
 

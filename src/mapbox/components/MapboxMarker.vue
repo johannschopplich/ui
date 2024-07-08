@@ -34,7 +34,7 @@ const props = withDefaults(
     rotationAlignment: "auto",
     occludedOpacity: 0.2,
     className: undefined,
-  },
+  }
 );
 
 const emit = defineEmits<{
@@ -62,7 +62,7 @@ const options = computed<MarkerOptions>(() => {
 });
 
 usePropsBinding(props, marker);
-useEventsBinding(emit, marker, events);
+useEventsBinding(marker, { emit, events });
 
 onMounted(() => {
   marker.value = new mapboxgl.Marker(options.value)

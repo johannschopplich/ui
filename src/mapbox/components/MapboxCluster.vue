@@ -105,7 +105,7 @@ const source = computed<GeoJSONSourceSpecification>(() => ({
   clusterMaxZoom: props.clusterMaxZoom,
   clusterRadius: props.clusterRadius,
   clusterMinPoints: props.clusterMinPoints,
-  clusterProperties: props.clusterProperties,
+  clusterProperties: { ...props.clusterProperties },
 }));
 
 const clustersLayer = computed(

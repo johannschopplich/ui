@@ -43,7 +43,7 @@ const options = computed<LayerSpecification>(() => {
   return _options;
 });
 
-useEventsBinding(emit, map, events, props.id);
+useEventsBinding(map, { emit, events, layerId: props.id });
 
 onMounted(() => {
   removeLayer();

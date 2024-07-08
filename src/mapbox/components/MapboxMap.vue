@@ -77,7 +77,7 @@ const props = withDefaults(
     localIdeographFontFamily: "sans-serif",
     performanceMetricsCollection: false,
     tessellationStep: 3,
-  },
+  }
 );
 
 const emit = defineEmits<{
@@ -146,7 +146,7 @@ const options = computed<MapOptions>(() => {
   return { ...rest, style, container: root.value! };
 });
 
-useEventsBinding(emit, map, events);
+useEventsBinding(map, { emit, events });
 usePropsBinding(props, map);
 
 onMounted(() => {

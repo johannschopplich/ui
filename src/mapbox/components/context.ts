@@ -1,7 +1,5 @@
 import type { InjectionKey, ShallowRef } from "vue";
-import type { Event, Map, MapEvent } from "mapbox-gl";
-
-type Listener = (arg1: any) => void;
+import type { Map } from "mapbox-gl";
 
 export type MapboxImage =
   | HTMLImageElement
@@ -20,17 +18,6 @@ export interface MapboxImageProps {
     pixelRatio?: number;
     sdf?: boolean;
   };
-}
-
-// TODO: Replace with native `Evented` type when exported from `mapbox-gl`
-export declare class Evented {
-  on(type: MapEvent, listener: Listener): this;
-  off(type: MapEvent, listener: Listener): this;
-  once(type: MapEvent): Promise<Event>;
-  once(type: MapEvent, listener: Listener): this;
-  fire(event: Event | string, properties?: object): this;
-  listens(type: string): boolean;
-  setEventedParent(parent?: Evented, data?: unknown | (() => unknown)): this;
 }
 
 let clusterIndex = 0;
