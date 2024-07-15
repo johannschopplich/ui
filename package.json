@@ -62,6 +62,7 @@
     "vue": "^3"
   },
   "dependencies": {
+    "@byjohann/utils": "^0.1.1",
     "@nuxt/kit": "^3.12.3",
     "@nuxt/schema": "^3.12.3"
   },
@@ -71,7 +72,7 @@
     "medium-zoom": "^1.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.3",
+    "@antfu/eslint-config": "^2.22.3",
     "@iconify-json/ph": "^1.1.13",
     "@julr/unocss-preset-forms": "^0.1.0",
     "@types/node": "^20.14.10",
@@ -80,8 +81,8 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vueuse/core": "^10.11.0",
     "bumpp": "^9.4.1",
-    "eslint": "^9.6.0",
-    "prettier": "^3.3.2",
+    "eslint": "^9.7.0",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "unbuild": "^3.0.0-rc.6",
     "unocss": "^0.61.3",

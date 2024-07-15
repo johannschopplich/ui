@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide } from "vue";
-import { generateRandomString } from "../utils";
+import { generateRandomId } from "@byjohann/utils";
 import { gridPatternCtxKey } from "./context";
 
 const props = withDefaults(
@@ -13,12 +13,12 @@ const props = withDefaults(
     size: 64,
     offsetX: -1,
     offsetY: -1,
-  },
+  }
 );
 
 provide(gridPatternCtxKey, props);
 
-const id = generateRandomString();
+const id = generateRandomId();
 </script>
 
 <template>
