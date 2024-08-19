@@ -7,14 +7,14 @@ import type { Marker, Map as _Map } from "mapbox-gl";
  */
 export function usePropsBinding<T extends _Map | Marker>(
   props: Record<string, unknown>,
-  element: Ref<T | undefined>
+  element: Ref<T | undefined>,
 ) {
   /**
    * Bind props to the given element in order to update them when they change
    */
   function bindProps(element: T) {
     for (const prop of Object.keys(props).filter(
-      (prop) => props[prop] != null
+      (prop) => props[prop] != null,
     )) {
       const setMethodName =
         prop === "mapStyle" ? "setStyle" : `set${upperFirst(prop)}`;
@@ -30,7 +30,7 @@ export function usePropsBinding<T extends _Map | Marker>(
         },
         {
           deep: Array.isArray(props[prop]) || isObject(props[prop]),
-        }
+        },
       );
     }
   }

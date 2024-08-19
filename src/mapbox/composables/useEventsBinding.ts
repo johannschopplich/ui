@@ -1,8 +1,10 @@
 import { computed, useAttrs, watch } from "vue";
 import type { Ref } from "vue";
-import type { MapEvent, Marker, Map as _Map } from "mapbox-gl";
+import type { MapEventType, Marker, Map as _Map } from "mapbox-gl";
 
-const cache = new Map<string, MapEvent>();
+type MarkerEventType = "dragstart" | "drag" | "dragend";
+
+const cache = new Map<string, MapEventType>();
 const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 
 /**
@@ -22,15 +24,15 @@ export function useEventsBinding<T extends _Map | Marker>(
     events?: string[];
     /** The layer on which the events are delegated */
     layerId?: string;
-  }
+  },
 ) {
   const attrs = useAttrs();
   const vueEventNames = computed(() =>
     Object.entries(attrs)
       .filter(
-        ([name, value]) => name.startsWith("on") && typeof value === "function"
+        ([name, value]) => name.startsWith("on") && typeof value === "function",
       )
-      .map(([name]) => name)
+      .map(([name]) => name),
   );
 
   const cleanupFns = new Map<string, () => void>();
@@ -56,21 +58,21 @@ export function useEventsBinding<T extends _Map | Marker>(
 
       if (!originalEvent || !events.includes(originalEvent)) continue;
 
-      const handler = (...payload: any[]) => {
-        emit(`mb-${originalEvent}`, ...payload);
+      const handler = (...args: any[]) => {
+        emit(`mb-${originalEvent}`, ...args);
       };
 
       if (layerId) {
-        (el as unknown as _Map).on(originalEvent, layerId, handler);
+        (el as _Map).on(originalEvent, layerId, handler);
 
         cleanupFns.set(eventName, () => {
-          (el as unknown as _Map).off(originalEvent, layerId, handler);
+          (el as _Map).off(originalEvent, layerId, handler);
         });
       } else {
-        el.on(originalEvent, handler);
+        (el as Marker).on(originalEvent as MarkerEventType, handler);
 
         cleanupFns.set(eventName, () => {
-          el.off(originalEvent, handler);
+          (el as Marker).off(originalEvent as MarkerEventType, handler);
         });
       }
     }
@@ -81,12 +83,12 @@ export function useEventsBinding<T extends _Map | Marker>(
     (newVueEventNames = [], oldVueEventNames = []) => {
       // Get old event names not in the new event names
       const eventNamesToDelete = oldVueEventNames.filter(
-        (name) => !newVueEventNames.includes(name)
+        (name) => !newVueEventNames.includes(name),
       );
 
       // Get new event names not in the old event names
       const eventNamesToAdd = (newVueEventNames ?? []).filter(
-        (name) => !oldVueEventNames.includes(name)
+        (name) => !oldVueEventNames.includes(name),
       );
 
       if (element.value) {
@@ -104,7 +106,7 @@ export function useEventsBinding<T extends _Map | Marker>(
         });
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 }
 
@@ -117,8 +119,8 @@ function getOriginalEvent(vueEventName: string) {
       vueEventName,
       vueEventName.replace(
         EVENT_PREFIX,
-        (_match, $1, $2) => $1.toLowerCase() + $2
-      ) as MapEvent
+        (match, $1, $2) => $1.toLowerCase() + $2,
+      ) as MapEventType,
     );
   }
 

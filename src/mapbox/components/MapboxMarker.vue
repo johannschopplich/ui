@@ -34,7 +34,7 @@ const props = withDefaults(
     rotationAlignment: "auto",
     occludedOpacity: 0.2,
     className: undefined,
-  }
+  },
 );
 
 const emit = defineEmits<{
