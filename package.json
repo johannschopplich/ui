@@ -2,7 +2,7 @@
   "name": "@byjohann/ui",
   "type": "module",
   "version": "0.8.0",
-  "packageManager": "pnpm@9.7.1",
+  "packageManager": "pnpm@9.8.0",
   "description": "A collection of Vue.js components for my projects",
   "author": "Johann Schopplich <hello@johannschopplich.com>",
   "license": "MIT",
@@ -62,9 +62,9 @@
     "vue": "^3"
   },
   "dependencies": {
-    "@byjohann/utils": "^0.4.1",
-    "@nuxt/kit": "^3.12.4",
-    "@nuxt/schema": "^3.12.4"
+    "@byjohann/utils": "^0.6.0",
+    "@nuxt/kit": "^3.13.0",
+    "@nuxt/schema": "^3.13.0"
   },
   "optionalDependencies": {
     "@types/geojson": "^7946.0.14",
@@ -72,7 +72,7 @@
     "medium-zoom": "^1.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.26.0",
+    "@antfu/eslint-config": "^2.27.1",
     "@iconify-json/ph": "^1.1.14",
     "@julr/unocss-preset-forms": "^0.1.0",
     "@types/node": "^20.16.1",
@@ -80,13 +80,13 @@
     "@unocss/reset": "^0.62.2",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vueuse/core": "^11.0.1",
-    "bumpp": "^9.5.1",
+    "bumpp": "^9.5.2",
     "eslint": "^9.9.0",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",
     "unbuild": "^3.0.0-rc.7",
     "unocss": "^0.62.2",
-    "vite": "^5.4.1",
+    "vite": "^5.4.2",
     "vue": "^3.4.38",
     "vue-tsc": "^2.0.29"
   }
