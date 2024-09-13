@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, provide, ref } from "vue";
 import { useElementBounding } from "@vueuse/core";
+import { computed, provide, ref } from "vue";
 import { textRevealCtxKey } from "./context";
 
 const props = withDefaults(

@@ -13,12 +13,12 @@ import MotionText from "./MotionText.vue";
 import ScrollObserver from "./ScrollObserver.vue";
 import ScrollReactor from "./ScrollReactor.vue";
 import ScrollReactorGroup from "./ScrollReactorGroup.vue";
+import ScrollReveal from "./ScrollReveal.vue";
 import ScrollTrigger from "./ScrollTrigger.vue";
 import ScrollTriggerGroup from "./ScrollTriggerGroup.vue";
 import SliderGroup from "./SliderGroup.vue";
 import SliderItem from "./SliderItem.vue";
 import SliderPagination from "./SliderPagination.vue";
-import ScrollReveal from "./ScrollReveal.vue";
 import SpotlightCard from "./SpotlightCard.vue";
 import TextReveal from "./TextReveal.vue";
 import TextRevealToken from "./TextRevealToken.vue";
@@ -40,12 +40,12 @@ export {
   ScrollObserver,
   ScrollReactor,
   ScrollReactorGroup,
+  ScrollReveal,
   ScrollTrigger,
   ScrollTriggerGroup,
   SliderGroup,
   SliderItem,
   SliderPagination,
-  ScrollReveal,
   SpotlightCard,
   TextReveal,
   TextRevealToken,

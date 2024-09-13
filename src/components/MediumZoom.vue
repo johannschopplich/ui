@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { watch } from "vue";
-import mediumZoom from "medium-zoom/dist/pure";
 import type { Zoom, ZoomOptions } from "medium-zoom";
 import type { ComponentPublicInstance } from "vue";
 import type { ComponentConstructor } from "../types";
+import mediumZoom from "medium-zoom/dist/pure";
+import { watch } from "vue";
 
 import "medium-zoom/dist/style.css";
 

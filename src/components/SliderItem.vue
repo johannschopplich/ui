@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, inject, ref, watch } from "vue";
 import {
   useElementBounding,
   useElementSize,
   useElementVisibility,
 } from "@vueuse/core";
+import { computed, inject, ref, watch } from "vue";
 import { sliderCtxKey } from "./context";
 
 const props = withDefaults(

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useFocus } from "@vueuse/core";
+import { ref } from "vue";
 import ModalsContainer from "./ModalsContainer.vue";
 
 const props = defineProps<{

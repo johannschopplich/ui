@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, provide, ref, watch } from "vue";
 import { useLocalStorage, useScroll, watchDebounced } from "@vueuse/core";
+import { onMounted, provide, ref, watch } from "vue";
 import { sliderCtxKey } from "./context";
 
 defineOptions({ inheritAttrs: false });

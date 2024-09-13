@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 import { useDebounceFn, useResizeObserver } from "@vueuse/core";
+import { onMounted, ref } from "vue";
 
 const container = ref<HTMLElement | undefined>();
 let properties:

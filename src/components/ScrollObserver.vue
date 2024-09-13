@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { provide, ref } from "vue";
 import { usePrevious } from "@vueuse/core";
+import { provide, ref } from "vue";
 import { scrollObserverCtxKey } from "./context";
 
 withDefaults(

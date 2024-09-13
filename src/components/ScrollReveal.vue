@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
 import {
   useElementBounding,
   useElementVisibility,
   useWindowSize,
 } from "@vueuse/core";
+import { computed, ref, watch } from "vue";
 
 const props = withDefaults(
   defineProps<{

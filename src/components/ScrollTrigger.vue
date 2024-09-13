@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, inject, ref, watchEffect } from "vue";
 import { useElementBounding, useWindowSize } from "@vueuse/core";
+import { computed, inject, ref, watchEffect } from "vue";
 import { scrollObserverCtxKey, scrollTriggerCtxKey } from "./context";
 
 withDefaults(

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, ref } from "vue";
 import { useElementSize } from "@vueuse/core";
+import { computed, inject, onMounted, ref } from "vue";
 import { detailsItemCtxKey } from "./context";
 
 withDefaults(
