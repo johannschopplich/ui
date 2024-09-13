@@ -85,12 +85,15 @@ const props = withDefaults(
       "circle-color": "#000",
       "circle-radius": 4,
     }),
-  },
+  }
 );
 
-const emit = defineEmits<{
-  (event: string, ...args: any[]): void;
-}>();
+const emit = defineEmits([
+  "mbClusterClick",
+  "mbFeatureClick",
+  "mbFeatureMouseenter",
+  "mbFeatureMouseleave",
+]);
 
 const map = useMap();
 const index = getClusterIndex();
@@ -117,7 +120,7 @@ const clustersLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clustersLayout,
       paint: props.clustersPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 const clusterCountLayer = computed(
@@ -129,7 +132,7 @@ const clusterCountLayer = computed(
       filter: ["has", "point_count"],
       layout: props.clusterCountLayout,
       paint: props.clusterCountPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 const unclusteredPointLayer = computed(
@@ -141,7 +144,7 @@ const unclusteredPointLayer = computed(
       filter: ["!", ["has", "point_count"]],
       layout: props.unclusteredPointLayout,
       paint: props.unclusteredPointPaint,
-    }) as LayerSpecification,
+    }) as LayerSpecification
 );
 
 /**
@@ -154,7 +157,6 @@ function clustersClickHandler(event: MapMouseEvent) {
   const clusterId = feature?.properties?.cluster_id as number;
 
   // Emit a cluster click event
-  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbClusterClick", clusterId, event);
 
   const source = map.value!.getSource(sourceId.value) as GeoJSONSource;
@@ -188,7 +190,6 @@ function clustersMouseleaveHandler() {
  * the feature object and the original event object
  */
 function unclusteredPointClickHandler(event: MapMouseEvent) {
-  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureClick", event.features?.[0], event);
 }
 
@@ -198,7 +199,6 @@ function unclusteredPointClickHandler(event: MapMouseEvent) {
  * parameters, and sets the cursor style to pointer
  */
 function unclusteredPointMouseenterHandler(event: MapMouseEvent) {
-  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureMouseenter", event.features?.[0], event);
   map.value!.getCanvas().style.cursor = "pointer";
 }
@@ -209,7 +209,6 @@ function unclusteredPointMouseenterHandler(event: MapMouseEvent) {
  * the cursor style to its default value
  */
 function unclusteredPointMouseleaveHandler(event: MapMouseEvent) {
-  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbFeatureMouseleave", event);
   map.value!.getCanvas().style.cursor = "";
 }
