@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from "vue";
 import type { LayerSpecification } from "mapbox-gl";
+import { computed, onMounted, onUnmounted } from "vue";
 import { useEventsBinding, useMap } from "../composables";
 
 const props = defineProps<{
   id: string;
   options: LayerSpecification;
   beforeId?: string;
-}>();
-
-const emit = defineEmits<{
-  (event: string, ...args: any[]): void;
 }>();
 
 /**
@@ -33,6 +29,23 @@ const events = [
   "touchcancel",
 ];
 
+// eslint-disable-next-line vue/define-macros-order
+const emit = defineEmits([
+  "mousedown",
+  "mouseup",
+  "click",
+  "dblclick",
+  "mousemove",
+  "mouseenter",
+  "mouseleave",
+  "mouseover",
+  "mouseout",
+  "contextmenu",
+  "touchstart",
+  "touchend",
+  "touchcancel",
+]);
+
 const map = useMap();
 const options = computed<LayerSpecification>(() => {
   const _options = { ...props.options, id: props.id };
@@ -43,7 +56,11 @@ const options = computed<LayerSpecification>(() => {
   return _options;
 });
 
-useEventsBinding(map, { emit, events, layerId: props.id });
+useEventsBinding(map, {
+  emit: emit as (event: string, ...args: any[]) => void,
+  events,
+  layerId: props.id,
+});
 
 onMounted(() => {
   removeLayer();

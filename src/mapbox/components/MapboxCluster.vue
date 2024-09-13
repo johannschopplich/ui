@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import type * as GeoJSON from "geojson";
 import type {
   GeoJSONSource,
   GeoJSONSourceSpecification,
@@ -9,11 +9,11 @@ import type {
   MapMouseEvent,
   SymbolLayerSpecification,
 } from "mapbox-gl";
-import type * as GeoJSON from "geojson";
+import { computed, ref } from "vue";
 import { useMap } from "../composables";
+import { getClusterIndex } from "./context";
 import MapboxLayer from "./MapboxLayer.vue";
 import MapboxSource from "./MapboxSource.vue";
-import { getClusterIndex } from "./context";
 
 const props = withDefaults(
   defineProps<{

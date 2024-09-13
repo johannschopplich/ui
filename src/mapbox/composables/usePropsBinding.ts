@@ -1,6 +1,6 @@
-import { watch } from "vue";
+import type { Map as _Map, Marker } from "mapbox-gl";
 import type { Ref } from "vue";
-import type { Marker, Map as _Map } from "mapbox-gl";
+import { watch } from "vue";
 
 /**
  * Map a Mapbox element's events to the given Vue element

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, useSlots } from "vue";
-import mapboxgl from "mapbox-gl";
 import type { Anchor, LngLatLike, Marker, PointLike } from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
+import { computed, onMounted, onUnmounted, ref, useSlots } from "vue";
 import { useEventsBinding, useMap, usePropsBinding } from "../composables";
 
 interface MarkerOptions {

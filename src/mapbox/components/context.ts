@@ -1,5 +1,5 @@
-import type { InjectionKey, ShallowRef } from "vue";
 import type { Map } from "mapbox-gl";
+import type { InjectionKey, ShallowRef } from "vue";
 
 export type MapboxImage =
   | HTMLImageElement

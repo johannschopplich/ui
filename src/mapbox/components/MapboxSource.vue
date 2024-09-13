@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, watch } from "vue";
 import type { GeoJSONSource, GeoJSONSourceSpecification } from "mapbox-gl";
+import { onMounted, onUnmounted, watch } from "vue";
 import { useMap } from "../composables";
 
 const props = defineProps<{

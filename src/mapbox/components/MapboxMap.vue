@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Map, MapOptions, StyleSpecification } from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import {
   computed,
   onMounted,
@@ -7,8 +9,6 @@ import {
   ref,
   shallowRef,
 } from "vue";
-import mapboxgl from "mapbox-gl";
-import type { Map, MapOptions, StyleSpecification } from "mapbox-gl";
 import { useEventsBinding, usePropsBinding } from "../composables";
 import { mapCtxKey } from "./context";
 
@@ -80,9 +80,58 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits<{
-  (event: string, ...args: any[]): void;
-}>();
+const emit = defineEmits([
+  "boxzoomcancel",
+  "boxzoomend",
+  "boxzoomstart",
+  "click",
+  "contextmenu",
+  "data",
+  "dataloading",
+  "dblclick",
+  "drag",
+  "dragend",
+  "dragstart",
+  "error",
+  "idle",
+  "load",
+  "mousedown",
+  "mouseenter",
+  "mouseleave",
+  "mousemove",
+  "mouseout",
+  "mouseover",
+  "mouseup",
+  "move",
+  "moveend",
+  "movestart",
+  "pitch",
+  "pitchend",
+  "pitchstart",
+  "remove",
+  "render",
+  "resize",
+  "rotate",
+  "rotateend",
+  "rotatestart",
+  "sourcedata",
+  "sourcedataloading",
+  "styledata",
+  "styledataloading",
+  "styleimagemissing",
+  "touchcancel",
+  "touchend",
+  "touchmove",
+  "touchstart",
+  "webglcontextlost",
+  "webglcontextrestored",
+  "wheel",
+  "zoom",
+  "zoomend",
+  "zoomstart",
+  // Custom events
+  "mbCreated",
+]);
 
 /** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#map-events */
 const events = [
@@ -146,7 +195,10 @@ const options = computed<MapOptions>(() => {
   return { ...rest, style, container: root.value! };
 });
 
-useEventsBinding(map, { emit, events });
+useEventsBinding(map, {
+  emit: emit as (event: string, ...args: any[]) => void,
+  events,
+});
 usePropsBinding(props, map);
 
 onMounted(() => {
@@ -157,7 +209,6 @@ onMounted(() => {
     isLoaded.value = true;
   });
 
-  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbCreated", map.value);
 
   // Mapbox has some resize issues

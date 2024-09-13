@@ -20,7 +20,7 @@ export function useModals(scope = "") {
 
   async function open<T extends ComponentConstructor>(
     component: T,
-    bindings: Bindings<T>
+    bindings: Bindings<T>,
   ) {
     return new Promise<ReturnValue<T>>((resolve) => {
       const id = useId()!;

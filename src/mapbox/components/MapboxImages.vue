@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { MapboxImageProps } from "./context";
 import { ref } from "vue";
 import MapboxImage from "./MapboxImage.vue";
-import type { MapboxImageProps } from "./context";
 
 const props = defineProps<{
   /** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#map#addimage */

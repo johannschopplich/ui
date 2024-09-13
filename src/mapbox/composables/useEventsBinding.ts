@@ -1,6 +1,6 @@
-import { computed, useAttrs, watch } from "vue";
+import type { Map as _Map, MapEventType, Marker } from "mapbox-gl";
 import type { Ref } from "vue";
-import type { MapEventType, Marker, Map as _Map } from "mapbox-gl";
+import { computed, useAttrs, watch } from "vue";
 
 type MarkerEventType = "dragstart" | "drag" | "dragend";
 
@@ -10,18 +10,21 @@ const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 /**
  * Map a Mapbox element's events to a Vue component
  */
-export function useEventsBinding<T extends _Map | Marker>(
+export function useEventsBinding<
+  T extends _Map | Marker,
+  Events extends string[],
+>(
   /** The element bound to the component */
   element: Ref<T | undefined>,
   {
     emit,
-    events = [],
+    events,
     layerId,
   }: {
     /** The emit function for the current component */
     emit: (event: string, ...args: any[]) => void;
     /** The events to map */
-    events?: string[];
+    events?: Events;
     /** The layer on which the events are delegated */
     layerId?: string;
   },
@@ -56,7 +59,7 @@ export function useEventsBinding<T extends _Map | Marker>(
     for (const eventName of eventNames) {
       const originalEvent = getOriginalEvent(eventName);
 
-      if (!originalEvent || !events.includes(originalEvent)) continue;
+      if (!originalEvent || !events?.includes(originalEvent)) continue;
 
       const handler = (...args: any[]) => {
         emit(`mb-${originalEvent}`, ...args);

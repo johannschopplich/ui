@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { MapboxImage, MapboxImageProps } from "./context";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useMap } from "../composables";
-import type { MapboxImage, MapboxImageProps } from "./context";
 
 const props = defineProps<{
   id: string;

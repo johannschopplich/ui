@@ -12,7 +12,7 @@ const props = withDefaults(
     size: 64,
     offsetX: -1,
     offsetY: -1,
-  }
+  },
 );
 
 provide(gridPatternCtxKey, props);
