@@ -9,27 +9,6 @@ const props = defineProps<{
   beforeId?: string;
 }>();
 
-/**
- * All Map events which will be mapped/bounded to the component
- * @see https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-working-with-events
- */
-const events = [
-  "mousedown",
-  "mouseup",
-  "click",
-  "dblclick",
-  "mousemove",
-  "mouseenter",
-  "mouseleave",
-  "mouseover",
-  "mouseout",
-  "contextmenu",
-  "touchstart",
-  "touchend",
-  "touchcancel",
-];
-
-// eslint-disable-next-line vue/define-macros-order
 const emit = defineEmits([
   "mousedown",
   "mouseup",
@@ -45,6 +24,23 @@ const emit = defineEmits([
   "touchend",
   "touchcancel",
 ]);
+
+/** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-working-with-events */
+const events = [
+  "mousedown",
+  "mouseup",
+  "click",
+  "dblclick",
+  "mousemove",
+  "mouseenter",
+  "mouseleave",
+  "mouseover",
+  "mouseout",
+  "contextmenu",
+  "touchstart",
+  "touchend",
+  "touchcancel",
+];
 
 const map = useMap();
 const options = computed<LayerSpecification>(() => {
