@@ -2,9 +2,9 @@ import {
   addImportsSources,
   defineNuxtModule,
   extendViteConfig,
-  tryResolveModule,
   useLogger,
 } from "@nuxt/kit";
+import { createJiti } from "jiti";
 
 export interface ModuleOptions {}
 
@@ -33,10 +33,12 @@ export default defineNuxtModule<ModuleOptions>({
       );
     }
 
-    const hasMapboxGL = await tryResolveModule("mapbox-gl", [
-      nuxt.options.rootDir,
-    ]);
-    if (hasMapboxGL) {
+    const jiti = createJiti(nuxt.options.rootDir, {
+      alias: nuxt.options.alias,
+    });
+    const mapboxGlSrc = jiti.esmResolve("mapbox-gl", { try: true });
+
+    if (mapboxGlSrc) {
       extendViteConfig((config) => {
         config.optimizeDeps ||= {};
         config.optimizeDeps.include ||= [];
