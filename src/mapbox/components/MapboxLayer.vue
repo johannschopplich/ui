@@ -10,19 +10,19 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits([
-  "mousedown",
-  "mouseup",
-  "click",
-  "dblclick",
-  "mousemove",
-  "mouseenter",
-  "mouseleave",
-  "mouseover",
-  "mouseout",
-  "contextmenu",
-  "touchstart",
-  "touchend",
-  "touchcancel",
+  "mbMousedown",
+  "mbMouseup",
+  "mbClick",
+  "mbDblclick",
+  "mbMousemove",
+  "mbMouseenter",
+  "mbMouseleave",
+  "mbMouseover",
+  "mbMouseout",
+  "mbContextmenu",
+  "mbTouchstart",
+  "mbTouchend",
+  "mbTouchcancel",
 ]);
 
 /** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-working-with-events */
