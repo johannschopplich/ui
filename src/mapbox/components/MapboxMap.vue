@@ -80,58 +80,11 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits([
-  "mbBoxzoomcancel",
-  "mbBoxzoomend",
-  "mbBoxzoomstart",
-  "mbClick",
-  "mbContextmenu",
-  "mbData",
-  "mbDataloading",
-  "mbDblclick",
-  "mbDrag",
-  "mbDragend",
-  "mbDragstart",
-  "mb-error",
-  "mbIdle",
-  "mbLoad",
-  "mbMousedown",
-  "mbMouseenter",
-  "mbMouseleave",
-  "mbMousemove",
-  "mbMouseout",
-  "mbMouseover",
-  "mbMouseup",
-  "mbMove",
-  "mbMoveend",
-  "mbMovestart",
-  "mbPitch",
-  "mbPitchend",
-  "mbPitchstart",
-  "mbRemove",
-  "mbRender",
-  "mbResize",
-  "mbRotate",
-  "mbRotateend",
-  "mbRotatestart",
-  "mbSourcedata",
-  "mbSourcedataloading",
-  "mbStyledata",
-  "mbStyledataloading",
-  "mbStyleimagemissing",
-  "mbTouchcancel",
-  "mbTouchend",
-  "mbTouchmove",
-  "mbTouchstart",
-  "mbWebglcontextlost",
-  "mbWebglcontextrestored",
-  "mbWheel",
-  "mbZoom",
-  "mbZoomend",
-  "mbZoomstart",
-  // Custom events
-  "mbCreated",
-]);
+// If we strictly type the events, they will be removed from `$attrs`
+// https://github.com/vuejs/core/issues/7630
+const emit = defineEmits<{
+  (event: string, ...args: any[]): void;
+}>();
 
 /** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#map-events */
 const events = [
@@ -196,7 +149,7 @@ const options = computed<MapOptions>(() => {
 });
 
 useEventsBinding(map, {
-  emit: emit as (event: string, ...args: any[]) => void,
+  emit,
   events,
 });
 usePropsBinding(props, map);
@@ -209,6 +162,7 @@ onMounted(() => {
     isLoaded.value = true;
   });
 
+  // eslint-disable-next-line vue/require-explicit-emits
   emit("mbCreated", map.value);
 
   // Mapbox has some resize issues

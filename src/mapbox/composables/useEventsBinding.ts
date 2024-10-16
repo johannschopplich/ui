@@ -2,8 +2,6 @@ import type { Map as _Map, MapEventType, Marker } from "mapbox-gl";
 import type { Ref } from "vue";
 import { computed, useAttrs, watch } from "vue";
 
-type MarkerEventType = "dragstart" | "drag" | "dragend";
-
 const cache = new Map<string, MapEventType>();
 const EVENT_PREFIX = /onMb([A-Z])(.+)/;
 
@@ -24,7 +22,7 @@ export function useEventsBinding<
     /** The emit function for the current component */
     emit: (event: string, ...args: any[]) => void;
     /** The events to map */
-    events?: Events;
+    events: Events;
     /** The layer on which the events are delegated */
     layerId?: string;
   },
@@ -59,10 +57,10 @@ export function useEventsBinding<
     for (const eventName of eventNames) {
       const originalEvent = getOriginalEvent(eventName);
 
-      if (!originalEvent || !events?.includes(originalEvent)) continue;
+      if (!originalEvent || !events.includes(originalEvent)) continue;
 
       const handler = (...args: any[]) => {
-        emit(`mb-${originalEvent}`, ...args);
+        emit(`mb${upperFirst(originalEvent)}`, ...args);
       };
 
       if (layerId) {
@@ -72,10 +70,10 @@ export function useEventsBinding<
           (el as _Map).off(originalEvent, layerId, handler);
         });
       } else {
-        (el as Marker).on(originalEvent as MarkerEventType, handler);
+        (el as Marker).on(originalEvent, handler);
 
         cleanupFns.set(eventName, () => {
-          (el as Marker).off(originalEvent as MarkerEventType, handler);
+          (el as Marker).off(originalEvent, handler);
         });
       }
     }
@@ -128,4 +126,8 @@ function getOriginalEvent(vueEventName: string) {
   }
 
   return cache.get(vueEventName);
+}
+
+function upperFirst(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }

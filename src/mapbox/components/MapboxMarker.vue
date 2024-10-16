@@ -37,7 +37,11 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["mbDragstart", "mbDrag", "mbDragend"]);
+// If we strictly type the events, they will be removed from `$attrs`
+// https://github.com/vuejs/core/issues/7630
+const emit = defineEmits<{
+  (event: string, ...args: any[]): void;
+}>();
 
 /** @see https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker-events */
 const events = ["dragstart", "drag", "dragend"];
@@ -61,7 +65,7 @@ const options = computed<MarkerOptions>(() => {
 
 usePropsBinding(props, marker);
 useEventsBinding(marker, {
-  emit: emit as (event: string, ...args: any[]) => void,
+  emit,
   events,
 });
 

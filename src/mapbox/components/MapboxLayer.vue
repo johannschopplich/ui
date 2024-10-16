@@ -9,21 +9,11 @@ const props = defineProps<{
   beforeId?: string;
 }>();
 
-const emit = defineEmits([
-  "mbMousedown",
-  "mbMouseup",
-  "mbClick",
-  "mbDblclick",
-  "mbMousemove",
-  "mbMouseenter",
-  "mbMouseleave",
-  "mbMouseover",
-  "mbMouseout",
-  "mbContextmenu",
-  "mbTouchstart",
-  "mbTouchend",
-  "mbTouchcancel",
-]);
+// If we strictly type the events, they will be removed from `$attrs`
+// https://github.com/vuejs/core/issues/7630
+const emit = defineEmits<{
+  (event: string, ...args: any[]): void;
+}>();
 
 /** @see https://docs.mapbox.com/mapbox-gl-js/api/map/#instance-members-working-with-events */
 const events = [
@@ -53,7 +43,7 @@ const options = computed<LayerSpecification>(() => {
 });
 
 useEventsBinding(map, {
-  emit: emit as (event: string, ...args: any[]) => void,
+  emit,
   events,
   layerId: props.id,
 });

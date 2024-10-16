@@ -220,7 +220,7 @@ function unclusteredPointMouseleaveHandler(event: MapMouseEvent) {
     <MapboxLayer
       :id="clustersLayer.id"
       :options="clustersLayer"
-      @mb-click="clustersClickHandler"
+      @mb-click="clustersClickHandler as any"
       @mb-mouseenter="clustersMouseenterHandler"
       @mb-mouseleave="clustersMouseleaveHandler"
     />
@@ -228,9 +228,9 @@ function unclusteredPointMouseleaveHandler(event: MapMouseEvent) {
     <MapboxLayer
       :id="unclusteredPointLayer.id"
       :options="unclusteredPointLayer"
-      @mb-click="unclusteredPointClickHandler"
-      @mb-mouseenter="unclusteredPointMouseenterHandler"
-      @mb-mouseleave="unclusteredPointMouseleaveHandler"
+      @mb-click="unclusteredPointClickHandler as any"
+      @mb-mouseenter="unclusteredPointMouseenterHandler as any"
+      @mb-mouseleave="unclusteredPointMouseleaveHandler as any"
     />
   </div>
 </template>
