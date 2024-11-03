@@ -16,6 +16,7 @@ import ScrollReactorGroup from "./ScrollReactorGroup.vue";
 import ScrollReveal from "./ScrollReveal.vue";
 import ScrollTrigger from "./ScrollTrigger.vue";
 import ScrollTriggerGroup from "./ScrollTriggerGroup.vue";
+import SkeletonZone from "./SkeletonZone.vue";
 import SliderGroup from "./SliderGroup.vue";
 import SliderItem from "./SliderItem.vue";
 import SliderPagination from "./SliderPagination.vue";
@@ -43,6 +44,7 @@ export {
   ScrollReveal,
   ScrollTrigger,
   ScrollTriggerGroup,
+  SkeletonZone,
   SliderGroup,
   SliderItem,
   SliderPagination,
