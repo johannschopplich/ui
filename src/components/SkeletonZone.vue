@@ -1,11 +1,13 @@
 <script lang="ts">
+import type * as CSS from "csstype";
 import type { PrimitiveProps } from "./Primitive";
 import { Primitive } from "./Primitive";
 
 export interface SkeletonZoneProps extends PrimitiveProps {
   loading?: boolean;
-  width?: string;
-  height?: string;
+  position?: CSS.Property.Position;
+  width?: CSS.Property.Width;
+  height?: CSS.Property.Height;
   loaderClass?: string;
 }
 </script>
@@ -14,6 +16,7 @@ export interface SkeletonZoneProps extends PrimitiveProps {
 withDefaults(defineProps<SkeletonZoneProps>(), {
   as: "div",
   loading: true,
+  position: "relative",
   width: "100%",
   height: "100%",
 });
@@ -23,8 +26,11 @@ withDefaults(defineProps<SkeletonZoneProps>(), {
   <Primitive
     :as="as"
     :as-child="asChild"
-    class="relative"
-    :style="{ width, height }"
+    :style="{
+      position,
+      width,
+      height,
+    }"
   >
     <slot />
     <div
