@@ -1,7 +1,7 @@
 {
   "name": "@byjohann/ui",
   "type": "module",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "packageManager": "pnpm@9.12.3",
   "description": "A collection of Vue.js components for my projects",
   "author": "Johann Schopplich <hello@johannschopplich.com>",
