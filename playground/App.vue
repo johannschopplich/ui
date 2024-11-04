@@ -103,13 +103,13 @@ async function openModal() {
 
     <div class="relative">
       <SkeletonZone
-        v-slot="{ isLoading, setLoading }"
+        v-slot="{ isLoading, disableLoading }"
         loader-class="bg-gray-200"
       >
         <div
           class="aspect-1/1 w-full from-green-300 to-emerald-400 bg-gradient-to-b"
           :class="[isLoading && 'opacity-0']"
-          @click="setLoading(false)"
+          @click="disableLoading()"
         />
       </SkeletonZone>
       <div

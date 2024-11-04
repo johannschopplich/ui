@@ -25,7 +25,8 @@ const props = withDefaults(defineProps<SkeletonZoneProps>(), {
 defineSlots<{
   default: (props: {
     isLoading: boolean;
-    setLoading: (value: boolean) => void;
+    enableLoading: () => void;
+    disableLoading: () => void;
   }) => any;
 }>();
 
@@ -38,8 +39,12 @@ watch(
   },
 );
 
-function setLoading(value: boolean) {
-  isLoading.value = value;
+function enableLoading() {
+  isLoading.value = true;
+}
+
+function disableLoading() {
+  isLoading.value = false;
 }
 </script>
 
@@ -53,7 +58,11 @@ function setLoading(value: boolean) {
       height,
     }"
   >
-    <slot :is-loading="isLoading" :set-loading="setLoading" />
+    <slot
+      :is-loading="isLoading"
+      :enable-loading="enableLoading"
+      :disable-loading="disableLoading"
+    />
     <div
       v-if="isLoading"
       class="pointer-events-none absolute inset-0 animate-pulse"
