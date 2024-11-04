@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { computed, inject, provide, ref } from "vue";
 import { detailsCtxKey, detailsItemCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
   }>(),
   {
     as: "div",

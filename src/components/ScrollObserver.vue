@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { usePrevious } from "@vueuse/core";
 import { provide, ref } from "vue";
 import { scrollObserverCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
   }>(),
   {
     as: "div",

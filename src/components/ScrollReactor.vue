@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { computed, inject, ref } from "vue";
 import { scrollObserverCtxKey, scrollReactorCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
   }>(),
   {
     as: "div",

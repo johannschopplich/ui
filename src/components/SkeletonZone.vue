@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { Component } from "vue";
+
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
     loading?: boolean;
     width?: string;
     height?: string;

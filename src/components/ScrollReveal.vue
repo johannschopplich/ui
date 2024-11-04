@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import {
   useElementBounding,
   useElementVisibility,
@@ -8,7 +9,7 @@ import { computed, ref, watch } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
     trigger?: "visible" | "top" | "middle";
     once?: boolean;
     offset?: number;

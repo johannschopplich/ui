@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { useElementSize } from "@vueuse/core";
 import { computed, inject, onMounted, ref } from "vue";
 import { detailsItemCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
   }>(),
   {
     as: "div",

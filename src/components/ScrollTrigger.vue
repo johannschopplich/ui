@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { useElementBounding, useWindowSize } from "@vueuse/core";
 import { computed, inject, ref, watchEffect } from "vue";
 import { scrollObserverCtxKey, scrollTriggerCtxKey } from "./context";
 
 withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
   }>(),
   {
     as: "div",

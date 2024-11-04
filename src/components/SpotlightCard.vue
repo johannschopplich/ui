@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { useMouseInElement } from "@vueuse/core";
 import { computed, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
     from?: string;
     via?: string;
     to?: string;

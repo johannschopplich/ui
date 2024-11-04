@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { useElementBounding } from "@vueuse/core";
 import { computed, provide, ref } from "vue";
 import { textRevealCtxKey } from "./context";
 
 const props = withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
     body: string;
   }>(),
   {

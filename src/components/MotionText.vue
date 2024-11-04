@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { Component } from "vue";
 import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    as?: string;
+    as?: string | Component;
     body: string;
     mode?: "symbol" | "word";
   }>(),
