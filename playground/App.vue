@@ -14,6 +14,7 @@ import {
   ScrollReveal,
   ScrollTrigger,
   ScrollTriggerGroup,
+  SkeletonZone,
   SliderGroup,
   SliderItem,
   SliderPagination,
@@ -99,6 +100,24 @@ async function openModal() {
         </div>
       </div>
     </ScrollReveal>
+
+    <div class="relative">
+      <SkeletonZone
+        v-slot="{ isLoading, setLoading }"
+        loader-class="bg-gray-200"
+      >
+        <div
+          class="aspect-1/1 w-full from-green-300 to-emerald-400 bg-gradient-to-b"
+          :class="[isLoading && 'opacity-0']"
+          @click="setLoading(false)"
+        />
+      </SkeletonZone>
+      <div
+        class="pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-medium leading-tight"
+      >
+        Skeleton Zone: Click to Load
+      </div>
+    </div>
 
     <TextReveal
       v-slot="{ tokens }"
