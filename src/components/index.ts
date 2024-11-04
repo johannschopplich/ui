@@ -10,6 +10,7 @@ import MasonryGrid from "./MasonryGrid.vue";
 import MediumZoom from "./MediumZoom.vue";
 import ModalsPortal from "./ModalsPortal.vue";
 import MotionText from "./MotionText.vue";
+import { Primitive } from "./Primitive";
 import ScrollObserver from "./ScrollObserver.vue";
 import ScrollReactor from "./ScrollReactor.vue";
 import ScrollReactorGroup from "./ScrollReactorGroup.vue";
@@ -38,6 +39,7 @@ export {
   MediumZoom,
   ModalsPortal,
   MotionText,
+  Primitive,
   ScrollObserver,
   ScrollReactor,
   ScrollReactorGroup,

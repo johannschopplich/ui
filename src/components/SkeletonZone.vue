@@ -12,7 +12,6 @@ withDefaults(
     loading: true,
     width: "100%",
     height: "100%",
-    loaderClass: "bg-black/10 dark:bg-white/10",
   },
 );
 </script>

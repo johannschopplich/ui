@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Zoom, ZoomOptions } from "medium-zoom";
-import type { ComponentPublicInstance } from "vue";
-import type { ComponentConstructor } from "../types";
+import type { Component, ComponentPublicInstance } from "vue";
 import mediumZoom from "medium-zoom/dist/pure";
 import { watch } from "vue";
 
@@ -10,7 +9,7 @@ import "medium-zoom/dist/style.css";
 const props = withDefaults(
   defineProps<{
     /** @default "img" */
-    as?: string | ComponentConstructor;
+    as?: string | Component;
     options?: ZoomOptions;
   }>(),
   {
@@ -48,6 +47,5 @@ function getZoom() {
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/component-name-in-template-casing -->
   <component :is="as" :ref="attachZoom" />
 </template>
