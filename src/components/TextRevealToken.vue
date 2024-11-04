@@ -6,6 +6,10 @@ const props = defineProps<{
   index: number;
 }>();
 
+defineSlots<{
+  default: (props: { isActive: boolean }) => any;
+}>();
+
 const context = inject(textRevealCtxKey)!;
 
 const isActive = computed(

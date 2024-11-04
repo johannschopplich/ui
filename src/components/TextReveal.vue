@@ -14,6 +14,10 @@ const props = withDefaults(
   },
 );
 
+defineSlots<{
+  default: (props: { tokens: string[]; progress: number }) => any;
+}>();
+
 const container = ref<HTMLElement | undefined>();
 const { height, top } = useElementBounding(container);
 const progress = computed(() => (-top.value / height.value) * 2);

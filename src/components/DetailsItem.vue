@@ -12,6 +12,10 @@ withDefaults(
   },
 );
 
+defineSlots<{
+  default: (props: { isActive: boolean; toggle: () => void }) => any;
+}>();
+
 const container = ref<HTMLElement | undefined>();
 const context = inject(detailsCtxKey)!;
 
@@ -30,6 +34,6 @@ function toggle() {
 
 <template>
   <component :is="as" ref="container">
-    <slot :toggle="toggle" :is-active="isActive" />
+    <slot :is-active="isActive" :toggle="toggle" />
   </component>
 </template>

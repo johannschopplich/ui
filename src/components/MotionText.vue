@@ -14,6 +14,10 @@ const props = withDefaults(
   },
 );
 
+defineSlots<{
+  default: (props: { tokens: string[] }) => any;
+}>();
+
 const tokens = computed(() => {
   const body = props.body.trim();
   return props.mode === "symbol"

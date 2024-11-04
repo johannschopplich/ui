@@ -13,6 +13,13 @@ withDefaults(
   },
 );
 
+defineSlots<{
+  default: (props: {
+    active: number | undefined;
+    previous: number | undefined;
+  }) => any;
+}>();
+
 const active = ref<number | undefined>();
 const previous = usePrevious(active, 0);
 

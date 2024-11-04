@@ -13,6 +13,10 @@ withDefaults(
   },
 );
 
+defineSlots<{
+  default: (props: { isActive: boolean; show: boolean; faded: boolean }) => any;
+}>();
+
 const container = ref<HTMLElement | undefined>();
 const context = inject(scrollObserverCtxKey)!;
 

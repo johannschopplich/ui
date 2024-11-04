@@ -21,6 +21,10 @@ const emit = defineEmits<{
   (event: "update:activeIndex", value: number): void;
 }>();
 
+defineSlots<{
+  default: (props: { isActive: boolean }) => any;
+}>();
+
 const isActive = ref(false);
 const slide = ref<HTMLElement | undefined>();
 const context = inject(sliderCtxKey)!;
