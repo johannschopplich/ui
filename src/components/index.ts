@@ -11,6 +11,7 @@ import MediumZoom from "./MediumZoom.vue";
 import ModalsPortal from "./ModalsPortal.vue";
 import MotionText from "./MotionText.vue";
 import { Primitive } from "./Primitive";
+import ScreenreaderOnly from "./ScreenreaderOnly.vue";
 import ScrollObserver from "./ScrollObserver.vue";
 import ScrollReactor from "./ScrollReactor.vue";
 import ScrollReactorGroup from "./ScrollReactorGroup.vue";
@@ -40,6 +41,7 @@ export {
   ModalsPortal,
   MotionText,
   Primitive,
+  ScreenreaderOnly,
   ScrollObserver,
   ScrollReactor,
   ScrollReactorGroup,

@@ -1,30 +1,36 @@
-<script setup lang="ts">
-import type { Component } from "vue";
+<script lang="ts">
+import type { PrimitiveProps } from "./Primitive";
+import { Primitive } from "./Primitive";
 
-withDefaults(
-  defineProps<{
-    as?: string | Component;
-    loading?: boolean;
-    width?: string;
-    height?: string;
-    loaderClass?: string;
-  }>(),
-  {
-    as: "div",
-    loading: true,
-    width: "100%",
-    height: "100%",
-  },
-);
+export interface SkeletonZoneProps extends PrimitiveProps {
+  loading?: boolean;
+  width?: string;
+  height?: string;
+  loaderClass?: string;
+}
+</script>
+
+<script setup lang="ts">
+withDefaults(defineProps<SkeletonZoneProps>(), {
+  as: "div",
+  loading: true,
+  width: "100%",
+  height: "100%",
+});
 </script>
 
 <template>
-  <component :is="as" class="relative" :style="{ width, height }">
+  <Primitive
+    :as="as"
+    :as-child="asChild"
+    class="relative"
+    :style="{ width, height }"
+  >
     <slot />
     <div
       v-if="loading"
       class="absolute inset-0 animate-pulse"
       :class="[loaderClass]"
     />
-  </component>
+  </Primitive>
 </template>
