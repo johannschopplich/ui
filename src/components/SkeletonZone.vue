@@ -14,6 +14,7 @@ export interface SkeletonZoneProps extends PrimitiveProps {
   /** @default "100%" */
   height?: CSS.Property.Height;
   loaderClass?: string;
+  /** @default true */
   animate?: boolean;
 }
 </script>
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<SkeletonZoneProps>(), {
   position: "relative",
   width: "100%",
   height: "100%",
+  animate: true,
 });
 
 defineSlots<{
