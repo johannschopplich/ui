@@ -28,7 +28,7 @@ export const Slot = defineComponent({
       const mergedProps = firstNonCommentChildren.props
         ? mergeProps(attrs, firstNonCommentChildren.props)
         : attrs;
-      // Remove class to prevent duplicated
+      // Remove `class` to prevent duplicated classes
       if (attrs.class && firstNonCommentChildren.props?.class)
         delete firstNonCommentChildren.props.class;
       const cloned = cloneVNode(firstNonCommentChildren, mergedProps);
