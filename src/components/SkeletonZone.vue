@@ -5,11 +5,16 @@ import { ref, watch } from "vue";
 import { Primitive } from "./Primitive";
 
 export interface SkeletonZoneProps extends PrimitiveProps {
+  /** @default true */
   loading?: boolean;
+  /** @default "relative" */
   position?: CSS.Property.Position;
+  /** @default "100%" */
   width?: CSS.Property.Width;
+  /** @default "100%" */
   height?: CSS.Property.Height;
   loaderClass?: string;
+  animate?: boolean;
 }
 </script>
 
@@ -65,8 +70,8 @@ function disableLoading() {
     />
     <div
       v-if="isLoading"
-      class="pointer-events-none absolute inset-0 animate-pulse"
-      :class="[loaderClass]"
+      class="pointer-events-none absolute inset-0"
+      :class="[animate && 'animate-pulse', loaderClass]"
     />
   </Primitive>
 </template>
