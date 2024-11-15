@@ -314,12 +314,17 @@ async function openModal() {
     </ScrollObserver>
 
     <div class="relative ml-[calc(50%-50vw)] w-[100vw]">
-      <Marquee>
-        <div v-for="(item, index) in 10" :key="index" class="h-full px-2.5">
+      <Marquee
+        :style="{
+          '--gap': '0.625rem',
+          '--duration': '100s',
+        }"
+      >
+        <div v-for="(item, index) in 10" :key="index">
           <div
-            class="relative h-full w-[28rem] border border-gray-200 rounded-2xl bg-gray-100 px-8 py-6"
+            class="w-[28rem] border border-gray-200 rounded-2xl bg-gray-100 px-8 py-6"
           >
-            <div class="pb-4 text-gray-800 font-light">
+            <div class="text-gray-800 font-light">
               {{ text }}
             </div>
           </div>
