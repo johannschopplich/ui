@@ -139,6 +139,7 @@ const events = [
 ];
 
 const map = shallowRef<Map | undefined>();
+let resizeObserver: ResizeObserver | undefined;
 provide(mapCtxKey, map);
 
 const root = ref<HTMLElement | undefined>();
@@ -165,18 +166,16 @@ onMounted(() => {
   // eslint-disable-next-line vue/require-explicit-emits
   emit("mbCreated", map.value);
 
-  // Mapbox has some resize issues
-  // Create an observer on this object
-  // Call resize on the map when we change size
-  const resizeObserver = new ResizeObserver(() => {
+  // Mapbox has some resize issues, so we need to manually resize the map
+  resizeObserver = new ResizeObserver(() => {
     map.value!.resize();
   });
   resizeObserver.observe(root.value!);
+});
 
-  onUnmounted(() => {
-    resizeObserver.disconnect();
-    map.value!.remove();
-  });
+onUnmounted(() => {
+  resizeObserver?.disconnect();
+  map.value?.remove();
 });
 
 defineExpose({ map });
