@@ -1,6 +1,6 @@
 import type { Ref } from "vue";
 import type { ComponentConstructor } from "../types";
-import { markRaw, ref, useId } from "vue";
+import { markRaw, ref } from "vue";
 
 interface Modal {
   id: string;
@@ -23,7 +23,7 @@ export function useModals(scope = "") {
     bindings: Bindings<T>,
   ) {
     return new Promise<ReturnValue<T>>((resolve) => {
-      const id = useId()!;
+      const id = crypto.randomUUID();
 
       modals.value.push({
         id,
