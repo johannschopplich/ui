@@ -64,19 +64,6 @@ When working with specific features, you can use the provided composables. Here 
 
 - [Modals](./src/composables/modals.ts)
 
-## Mapbox Tools
-
-This library supports Mapbox. Here is a list of all available Mapbox components and composables:
-
-- [useMap](./src/mapbox/composables.ts)
-- [MapboxCluster](./src/mapbox/components/MapboxCluster.vue)
-- [MapboxImage](./src/mapbox/components/MapboxImage.vue)
-- [MapboxImages](./src/mapbox/components/MapboxImages.vue)
-- [MapboxLayer](./src/mapbox/components/MapboxLayer.vue)
-- [MapboxMap](./src/mapbox/components/MapboxMap.vue)
-- [MapboxMarker](./src/mapbox/components/MapboxMarker.vue)
-- [MapboxSource](./src/mapbox/components/MapboxSource.vue)
-
 ## Utilities
 
 UI development is a lot about colors and typography. Here is a list of all available utilities:

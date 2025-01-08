@@ -1,10 +1,4 @@
-import {
-  addImportsSources,
-  defineNuxtModule,
-  extendViteConfig,
-  useLogger,
-} from "@nuxt/kit";
-import { createJiti } from "jiti";
+import { addImportsSources, defineNuxtModule, useLogger } from "@nuxt/kit";
 
 export interface ModuleOptions {}
 
@@ -31,21 +25,6 @@ export default defineNuxtModule<ModuleOptions>({
       logger.error(
         "`@byjohann/ui` requires the `@unocss/nuxt` module to be installed.",
       );
-    }
-
-    const jiti = createJiti(nuxt.options.rootDir, {
-      alias: nuxt.options.alias,
-    });
-    const mapboxGlSrc = jiti.esmResolve("mapbox-gl", { try: true });
-
-    if (mapboxGlSrc) {
-      extendViteConfig((config) => {
-        config.optimizeDeps ||= {};
-        config.optimizeDeps.include ||= [];
-
-        // Transform CJS packages to ESM
-        config.optimizeDeps.include.push("mapbox-gl");
-      });
     }
   },
 });

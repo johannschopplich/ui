@@ -29,10 +29,6 @@
       "types": "./dist/composables/index.d.ts",
       "import": "./dist/composables/index.mjs"
     },
-    "./mapbox": {
-      "types": "./dist/mapbox/index.d.ts",
-      "import": "./dist/mapbox/index.mjs"
-    },
     "./nuxt": {
       "types": "./dist/nuxt/index.d.ts",
       "import": "./dist/nuxt/index.mjs"
@@ -65,12 +61,10 @@
   "dependencies": {
     "@byjohann/utils": "^0.7.1",
     "@nuxt/kit": "^3.15.0",
-    "@nuxt/schema": "^3.15.0",
-    "jiti": "^2.4.2"
+    "@nuxt/schema": "^3.15.0"
   },
   "optionalDependencies": {
     "@types/geojson": "^7946.0.15",
-    "mapbox-gl": "^3.9.1",
     "medium-zoom": "^1.1.0"
   },
   "devDependencies": {
