@@ -48,17 +48,6 @@ const text =
       >
         A collection of Vue.js components for my projects
       </TextShimmer>
-      <p
-        class="text-center transition-transform,opacity duration-[--duration]"
-        :class="[!isActive && 'translate-y-8 opacity-0']"
-      >
-        <button
-          class="group mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-100 px-5 py-2.5 text-xs font-medium tracking-wide transition md:mt-8 hover:bg-gray-200"
-          @click="openModal()"
-        >
-          Open Modal
-        </button>
-      </p>
 
       <div class="transition-transform,opacity duration-[--duration] md:mt-12">
         <div class="grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 md:gap-y-8">
