@@ -368,7 +368,7 @@ async function openModal() {
     </DetailsGroup>
   </main>
 
-  <ModalsPortal />
+  <ModalsPortal overlay-class="bg-gray-500/50 backdrop-blur-sm" />
 </template>
 
 <style>

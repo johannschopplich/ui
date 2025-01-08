@@ -6,6 +6,7 @@ import { useModals } from "@byjohann/ui";
 
 const props = defineProps<{
   scope?: string;
+  overlayClass?: string;
 }>();
 
 const { modals } = useModals(props.scope);
@@ -20,7 +21,7 @@ const { modals } = useModals(props.scope);
   >
     <Transition name="background-fade">
       <slot v-if="modals.length">
-        <div class="fixed inset-0 bg-gray-500/50 backdrop-blur-sm" />
+        <div class="fixed inset-0" :class="[overlayClass]" />
       </slot>
     </Transition>
 
