@@ -29,7 +29,6 @@ export default defineNuxtConfig({
 
 This library provides a collection of Vue.js components. Here is a list of all available components:
 
-- [AutoGrowTextarea](./src/components/AutoGrowTextarea.vue)
 - [DetailsContent](./src/components/DetailsContent.vue)
 - [DetailsGroup](./src/components/DetailsGroup.vue)
 - [DetailsItem](./src/components/DetailsItem.vue)
