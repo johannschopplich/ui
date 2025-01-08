@@ -13,7 +13,6 @@ const { modals } = useModals(props.scope);
 
 <template>
   <div
-    class="relative z-[100]"
     :style="{
       '--duration-background': '200ms',
       '--duration-content': '100ms',
