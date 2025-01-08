@@ -7,7 +7,6 @@ import GridPattern from "./GridPattern.vue";
 import Marquee from "./Marquee.vue";
 import MasonryGrid from "./MasonryGrid.vue";
 import MediumZoom from "./MediumZoom.vue";
-import ModalsPortal from "./ModalsPortal.vue";
 import MotionText from "./MotionText.vue";
 import { Primitive } from "./Primitive";
 import ScreenreaderOnly from "./ScreenreaderOnly.vue";
@@ -36,7 +35,6 @@ export {
   Marquee,
   MasonryGrid,
   MediumZoom,
-  ModalsPortal,
   MotionText,
   Primitive,
   ScreenreaderOnly,

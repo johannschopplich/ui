@@ -6,7 +6,6 @@ import {
   DetailsItem,
   DotPattern,
   Marquee,
-  ModalsPortal,
   MotionText,
   ScrollObserver,
   ScrollReactor,
@@ -22,23 +21,9 @@ import {
   TextRevealToken,
   TextShimmer,
 } from "../src/components";
-import { useModals } from "../src/composables/modals";
-import TextModal from "./components/TextModal.vue";
 
 const text =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis recusandae enim aliquam praesentium? Eos labore ea praesentium incidunt. Magni corporis quos nostrum unde doloremque magnam ducimus recusandae vitae sit temporibus.";
-
-// Modal handling
-const { open } = useModals();
-const email = ref("me@example.com");
-
-async function openModal() {
-  const newValue = await open(TextModal, {
-    email: email.value,
-  });
-
-  if (newValue != null) email.value = newValue;
-}
 </script>
 
 <template>
@@ -367,8 +352,6 @@ async function openModal() {
       </DetailsItem>
     </DetailsGroup>
   </main>
-
-  <ModalsPortal overlay-class="bg-gray-500/50 backdrop-blur-sm" />
 </template>
 
 <style>

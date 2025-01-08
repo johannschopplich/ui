@@ -1,4 +1,4 @@
-import { addImportsSources, defineNuxtModule, useLogger } from "@nuxt/kit";
+import { defineNuxtModule, useLogger } from "@nuxt/kit";
 
 export interface ModuleOptions {}
 
@@ -13,12 +13,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Transpile the Vue.js components
     nuxt.options.build.transpile.push("@byjohann/ui");
-
-    // Add auto-imported composables
-    addImportsSources({
-      from: "@byjohann/ui",
-      imports: ["useModals"],
-    });
 
     // Make sure the UnoCSS Nuxt module is installed
     if (!nuxt.options.modules?.includes("@unocss/nuxt")) {

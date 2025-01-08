@@ -38,7 +38,6 @@ This library provides a collection of Vue.js components. Here is a list of all a
 - [Marquee](./src/components/Marquee.vue)
 - [MasonryGrid](./src/components/MasonryGrid.vue)
 - [MediumZoom](./src/components/MediumZoom.vue)
-- [ModalsPortal](./src/components/ModalsPortal.vue)
 - [MotionText](./src/components/MotionText.vue)
 - [Primitive](./src/components/Primitive)
 - [ScreenreaderOnly](./src/components/ScreenreaderOnly.vue)
@@ -56,12 +55,6 @@ This library provides a collection of Vue.js components. Here is a list of all a
 - [TextReveal](./src/components/TextReveal.vue)
 - [TextRevealToken](./src/components/TextRevealToken.vue)
 - [TextShimmer](./src/components/TextShimmer.vue)
-
-## Composables
-
-When working with specific features, you can use the provided composables. Here is a list of all available composables:
-
-- [Modals](./src/composables/modals.ts)
 
 ## Utilities
 
