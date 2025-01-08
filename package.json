@@ -25,10 +25,6 @@
       "types": "./dist/components/index.d.ts",
       "import": "./dist/components/index.mjs"
     },
-    "./composables": {
-      "types": "./dist/composables/index.d.ts",
-      "import": "./dist/composables/index.mjs"
-    },
     "./nuxt": {
       "types": "./dist/nuxt/index.d.ts",
       "import": "./dist/nuxt/index.mjs"
