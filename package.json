@@ -6,32 +6,32 @@
   "description": "A collection of Vue.js components for my projects",
   "author": "Johann Schopplich <hello@johannschopplich.com>",
   "license": "MIT",
-  "homepage": "https://github.com/johannschopplich/components#readme",
+  "homepage": "https://github.com/johannschopplich/ui#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johannschopplich/components.git"
+    "url": "git+https://github.com/johannschopplich/ui.git"
   },
   "bugs": {
-    "url": "https://github.com/johannschopplich/components/issues"
+    "url": "https://github.com/johannschopplich/ui/issues"
   },
   "keywords": [],
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "default": "./dist/index.mjs"
     },
     "./components": {
       "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.mjs"
+      "default": "./dist/components/index.mjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt/index.d.ts",
-      "import": "./dist/nuxt/index.mjs"
+      "default": "./dist/nuxt/index.mjs"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.mjs"
+      "default": "./dist/utils/index.mjs"
     }
   },
   "types": "./dist/index.d.ts",
