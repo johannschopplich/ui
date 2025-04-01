@@ -1,5 +1,5 @@
-import { defineConfig, presetIcons, presetWind } from "unocss";
+import { defineConfig, presetIcons, presetWind3 } from "unocss";
 
 export default defineConfig({
-  presets: [presetWind(), presetIcons()],
+  presets: [presetWind3(), presetIcons()],
 });
